@@ -1,0 +1,30 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/B220660/study/architecture/myFactory/Common.h
+stdbool.h
+-
+
+/home/B220660/study/architecture/myFactory/LinkedList.h
+
+/home/B220660/study/architecture/myFactory/testbed.c
+stdio.h
+-
+stdbool.h
+-
+stdlib.h
+-
+string.h
+-
+stdint.h
+-
+Common.h
+/home/B220660/study/architecture/myFactory/Common.h
+LinkedList.h
+/home/B220660/study/architecture/myFactory/LinkedList.h
+

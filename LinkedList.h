@@ -20,8 +20,8 @@ typedef struct{
 typedef struct {
     LinkedListSt_T *ptListSt;
 
-    Error_E (*InsertList)(LinkedListSt_T *ptList, void* pvData, uint32_t iDataSize);
-    Error_E (*InsertListFisrt)(LinkedListSt_T *ptListSt, void* pvData, uint32_t iDataSize);
+    LinkedList_T (*InsertList)(LinkedListSt_T *ptList, void* pvData, uint32_t iDataSize);
+    LinkedList_T (*InsertListFisrt)(LinkedListSt_T *ptListSt, void* pvData, uint32_t iDataSize);
     LinkedList_T *(*GetFirstList)(LinkedListSt_T *ptListSt);
     Error_E (*SetListData)(LinkedList_T *ptList, void* pvData, uint32_t iDataSize);
     Error_E (*DeleteList)(LinkedList_T *ptList);

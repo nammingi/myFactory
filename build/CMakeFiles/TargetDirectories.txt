@@ -1,0 +1,4 @@
+/home/B220660/study/architecture/myFactory/build/CMakeFiles/rebuild_cache.dir
+/home/B220660/study/architecture/myFactory/build/CMakeFiles/edit_cache.dir
+/home/B220660/study/architecture/myFactory/build/CMakeFiles/MyFactoryTest.dir
+/home/B220660/study/architecture/myFactory/build/CMakeFiles/My_Message.dir

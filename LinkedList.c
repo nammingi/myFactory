@@ -199,21 +199,23 @@ static Error_E SF_PrintListAll(LinkedListSt_T *ptListSt){
 
     LinkedList_T *ptList;
     void *pvIntData;
-    int *pIntData;
 
     ptList = ptListSt->ptHead;
-    pvIntData = (int*)malloc(sizeof(int));
+    pvIntData = (int*)calloc(1UL, sizeof(int));
 
-
+    int* data;
     while(SF_IsListTail(ptListSt, ptList) == FALSE){
+
         printf("check\n");
-        (void)memcpy(pvIntData,ptList->pvData,sizeof(int));
-        pIntData = ptList->pvData;
-        printf(">> %d \n", pIntData);
+
+        //(void)memcpy(pvIntData,ptList->pvData,sizeof(int));
+        memset(pvIntData, data, sizeof(int));
+        printf(">> %d \n", pvIntData);
         ptList = ptList->ptNext;
     }
     printf(">> End of list.\n");
-    free(pIntData);
+    free(pvIntData);
+    
     return rError;
 
 }

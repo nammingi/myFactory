@@ -1,5 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/My_Message.dir/LinkedList.c.o"
+  "CMakeFiles/My_Message.dir/MessageLib.c.o"
+  "CMakeFiles/My_Message.dir/Signal.c.o"
   "libMy_Message.pdb"
   "libMy_Message.so"
 )

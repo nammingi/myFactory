@@ -8,6 +8,8 @@ SET(THREADS_PREFER_PTRHEAD_FLAG ON)
 
 SET(SRC_FILES
     ./LinkedList.c
+    ./MessageLib.c
+    ./Signal.c
 )
 
 ADD_LIBRARY( ${LIBRARY} SHARED ${SRC_FILES})

@@ -10,7 +10,7 @@
 stdbool.h
 -
 
-/home/B220660/study/architecture/myFactory/LinkedList.h
+/home/B220660/study/architecture/myFactory/MessageLib.h
 
 /home/B220660/study/architecture/myFactory/testbed.c
 stdio.h
@@ -25,6 +25,6 @@ stdint.h
 -
 Common.h
 /home/B220660/study/architecture/myFactory/Common.h
-LinkedList.h
-/home/B220660/study/architecture/myFactory/LinkedList.h
+MessageLib.h
+/home/B220660/study/architecture/myFactory/MessageLib.h
 

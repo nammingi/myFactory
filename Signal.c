@@ -72,7 +72,7 @@ Error_E SignalWakeup(Signal_T *ptSignal){
     return eError;
 }
 
-Error_E SignaBarelWait(Signal_T *ptSignal){
+Error_E SignalBarelWait(Signal_T *ptSignal){
     Error_E eError = ERROR_NONE;
 
     pthread_cond_wait(&ptSignal->tCond, &ptSignal->tMutex);

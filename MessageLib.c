@@ -4,15 +4,27 @@
 #include <stdint.h>
 #include <pthread.h>
 
+#include "Common.h"
+
+#include "Signal.h"
 #include "MessageLib.h"
 #include "LinkedList.h"
-#include "Signal.h"
-#include "Common.h"
 
 struct Message_T{
     void* pvParam;
     uint32_t uiMessage;
 };
+
+typedef struct {
+    Message_T *ptMeesage;
+
+    pthread_t tThead;
+
+    Signal_T *ptSignal;
+    LinkedList_IF_T *ptLinkedListIF;
+
+    pfnMessageHandler fnMessageHandler;
+} MessageSt_T;
 
 typedef struct Message_IF_T{
     MessageSt_T *ptMessageSt;
@@ -22,21 +34,57 @@ typedef struct Message_IF_T{
 
 } Message_IF_T;
 
-typedef struct {
-    Message_T *ptMeesage;
-
-    LinkedList_IF_T LinkedList_IF;  
-    pthread_t tThead;
-
-    Signal_T *ptSignal;
-    LinkedList_IF_T *ptLinkedListIF;
-
-    pfnMessageHandler fnMessageHandler;
-} MessageSt_T;
 
 
+
+static Error_E SF_ProcessPostMessage(MessageSt_T *ptMessageSt, Message_T *ptMessage){
+
+}
 static void SF_MessageThread(MessageSt_T *ptMessageSt){
+    Error_E eError = ERROR_NONE;
+
     LinkedList_IF_T *ptLinkedList_IF;
+    LinkedListSt_T *ptListSt;
+    LinkedList_T *ptList;
+    
+
+    ptLinkedList_IF = ptMessageSt->ptLinkedListIF;
+    ptListSt = ptLinkedList_IF->ptListSt;
+
+    (void)SignalLock(ptMessageSt->ptSignal);
+
+    
+    if(ptLinkedList_IF->GetListCount(ptListSt) == 0){
+        SignalBareWait(ptMessageSt->ptSignal);
+    }
+
+    
+    // 리스트에서 맨 앞 리스트 가져옴
+    ptList = ptLinkedList_IF->GetFirstList(ptListSt);
+
+    // 가져온 리스트에 대해 리스트네임 가져옴
+    if(ptList != NULL){
+        char* pstrListName;
+
+        pstrListName = ptLinkedList_IF->GetListName(ptList);
+        // 가져온 리스트 네임 비교
+        /*
+        if(strcmp(pstrListName, "post") == 0){
+
+            Message_T *tMessage = (tMessage*)LinkedList_IF_T->GetListData(ptList);
+            SF_ProcessPostMessage(ptMessageSt, tMeesage);
+        }else{
+            
+        }*/
+
+    }
+    
+
+    // 네임에 맞게 프로세싱
+
+    // 언락?
+    
+    
 }
 
 static Error_E SF_CreateMessageThread(MessageSt_T *ptMessageSt){
@@ -63,11 +111,11 @@ static Error_E SF_PostMessage(MessageSt_T *ptMessageSt, uint32_t uiMessage, void
 
     if(ptMessageSt != NULL){
         LinkedList_T *ptInsertedList;
-        LinkedList_IF_T *ptLinkedListIF = ptMessageSt->LinkedList_IF;
+        LinkedList_IF_T *ptLinkedListIF = ptMessageSt->LinkedListIF;
 
         Message_T *ptMessage;
 
-        ptMessage = (*Message_T)calloc(1UL, sizeof(Message_T));
+        ptMessage = (Message_T*)calloc(1UL, sizeof(Message_T));
 
         if(ptMessage !=NULL){
             
@@ -81,7 +129,7 @@ static Error_E SF_PostMessage(MessageSt_T *ptMessageSt, uint32_t uiMessage, void
         ptInsertedList = ptLinkedListIF->InsertList(ptLinkedListIF->ptListSt, "post", ptMessage, sizeof(ptMessage));
 
         if(ptInsertedList != NULL){
-            (void)SignalBareWakeup(ptMessageSt->ptSignal)
+            (void)SignalBareWakeup(ptMessageSt->ptSignal);
         }
 
         (void)SignalUnlock(ptMessageSt->ptSignal);

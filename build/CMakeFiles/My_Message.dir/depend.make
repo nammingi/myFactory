@@ -5,3 +5,13 @@ CMakeFiles/My_Message.dir/LinkedList.c.o: ../Common.h
 CMakeFiles/My_Message.dir/LinkedList.c.o: ../LinkedList.c
 CMakeFiles/My_Message.dir/LinkedList.c.o: ../LinkedList.h
 
+CMakeFiles/My_Message.dir/MessageLib.c.o: ../Common.h
+CMakeFiles/My_Message.dir/MessageLib.c.o: ../LinkedList.h
+CMakeFiles/My_Message.dir/MessageLib.c.o: ../MessageLib.c
+CMakeFiles/My_Message.dir/MessageLib.c.o: ../MessageLib.h
+CMakeFiles/My_Message.dir/MessageLib.c.o: ../Signal.h
+
+CMakeFiles/My_Message.dir/Signal.c.o: ../Common.h
+CMakeFiles/My_Message.dir/Signal.c.o: ../Signal.c
+CMakeFiles/My_Message.dir/Signal.c.o: ../Signal.h
+

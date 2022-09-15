@@ -163,6 +163,60 @@ LinkedList.c.s:
 	$(MAKE) -f CMakeFiles/My_Message.dir/build.make CMakeFiles/My_Message.dir/LinkedList.c.s
 .PHONY : LinkedList.c.s
 
+MessageLib.o: MessageLib.c.o
+
+.PHONY : MessageLib.o
+
+# target to build an object file
+MessageLib.c.o:
+	$(MAKE) -f CMakeFiles/My_Message.dir/build.make CMakeFiles/My_Message.dir/MessageLib.c.o
+.PHONY : MessageLib.c.o
+
+MessageLib.i: MessageLib.c.i
+
+.PHONY : MessageLib.i
+
+# target to preprocess a source file
+MessageLib.c.i:
+	$(MAKE) -f CMakeFiles/My_Message.dir/build.make CMakeFiles/My_Message.dir/MessageLib.c.i
+.PHONY : MessageLib.c.i
+
+MessageLib.s: MessageLib.c.s
+
+.PHONY : MessageLib.s
+
+# target to generate assembly for a file
+MessageLib.c.s:
+	$(MAKE) -f CMakeFiles/My_Message.dir/build.make CMakeFiles/My_Message.dir/MessageLib.c.s
+.PHONY : MessageLib.c.s
+
+Signal.o: Signal.c.o
+
+.PHONY : Signal.o
+
+# target to build an object file
+Signal.c.o:
+	$(MAKE) -f CMakeFiles/My_Message.dir/build.make CMakeFiles/My_Message.dir/Signal.c.o
+.PHONY : Signal.c.o
+
+Signal.i: Signal.c.i
+
+.PHONY : Signal.i
+
+# target to preprocess a source file
+Signal.c.i:
+	$(MAKE) -f CMakeFiles/My_Message.dir/build.make CMakeFiles/My_Message.dir/Signal.c.i
+.PHONY : Signal.c.i
+
+Signal.s: Signal.c.s
+
+.PHONY : Signal.s
+
+# target to generate assembly for a file
+Signal.c.s:
+	$(MAKE) -f CMakeFiles/My_Message.dir/build.make CMakeFiles/My_Message.dir/Signal.c.s
+.PHONY : Signal.c.s
+
 testbed.o: testbed.c.o
 
 .PHONY : testbed.o
@@ -203,6 +257,12 @@ help:
 	@echo "... LinkedList.o"
 	@echo "... LinkedList.i"
 	@echo "... LinkedList.s"
+	@echo "... MessageLib.o"
+	@echo "... MessageLib.i"
+	@echo "... MessageLib.s"
+	@echo "... Signal.o"
+	@echo "... Signal.i"
+	@echo "... Signal.s"
 	@echo "... testbed.o"
 	@echo "... testbed.i"
 	@echo "... testbed.s"

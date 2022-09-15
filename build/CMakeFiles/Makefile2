@@ -81,7 +81,7 @@ CMakeFiles/MyFactoryTest.dir/all: CMakeFiles/My_Message.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/MyFactoryTest.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/B220660/study/architecture/myFactory/build/CMakeFiles 4
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/B220660/study/architecture/myFactory/build/CMakeFiles 6
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/MyFactoryTest.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/B220660/study/architecture/myFactory/build/CMakeFiles 0
 .PHONY : CMakeFiles/MyFactoryTest.dir/rule
@@ -103,12 +103,12 @@ CMakeFiles/MyFactoryTest.dir/clean:
 CMakeFiles/My_Message.dir/all:
 	$(MAKE) -f CMakeFiles/My_Message.dir/build.make CMakeFiles/My_Message.dir/depend
 	$(MAKE) -f CMakeFiles/My_Message.dir/build.make CMakeFiles/My_Message.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/B220660/study/architecture/myFactory/build/CMakeFiles --progress-num=3,4 "Built target My_Message"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/B220660/study/architecture/myFactory/build/CMakeFiles --progress-num=3,4,5,6 "Built target My_Message"
 .PHONY : CMakeFiles/My_Message.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/My_Message.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/B220660/study/architecture/myFactory/build/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/B220660/study/architecture/myFactory/build/CMakeFiles 4
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/My_Message.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/B220660/study/architecture/myFactory/build/CMakeFiles 0
 .PHONY : CMakeFiles/My_Message.dir/rule

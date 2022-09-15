@@ -20,7 +20,7 @@ typedef struct {
 
     void *(*GetListData)(LinkedList_T *ptList);
     uint32_t(*GetListDataSize)(LinkedList_T *ptList);
-
+    int (*GetListCount)(LinkedListSt_T *ptListSt);
     Error_E (*PrintListAll)(LinkedListSt_T *ptListSt);
 
 } LinkedList_IF_T;

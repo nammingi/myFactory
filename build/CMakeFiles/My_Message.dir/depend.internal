@@ -5,3 +5,13 @@ CMakeFiles/My_Message.dir/LinkedList.c.o
  /home/B220660/study/architecture/myFactory/Common.h
  /home/B220660/study/architecture/myFactory/LinkedList.c
  /home/B220660/study/architecture/myFactory/LinkedList.h
+CMakeFiles/My_Message.dir/MessageLib.c.o
+ /home/B220660/study/architecture/myFactory/Common.h
+ /home/B220660/study/architecture/myFactory/LinkedList.h
+ /home/B220660/study/architecture/myFactory/MessageLib.c
+ /home/B220660/study/architecture/myFactory/MessageLib.h
+ /home/B220660/study/architecture/myFactory/Signal.h
+CMakeFiles/My_Message.dir/Signal.c.o
+ /home/B220660/study/architecture/myFactory/Common.h
+ /home/B220660/study/architecture/myFactory/Signal.c
+ /home/B220660/study/architecture/myFactory/Signal.h

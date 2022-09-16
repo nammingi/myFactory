@@ -34,7 +34,11 @@ static Error_E SF_InitMutex(Signal_T *ptSignal){
 
 static Error_E SF_SignalWait(Signal_T *ptSignal){
     Error_E eError = ERROR_NONE;
-    pthread_cond_wait(&ptSignal->tCond, &ptSignal->tMutex);
+    int iRetVal = NULL; 
+    iRetVal = pthread_cond_wait(&ptSignal->tCond, &ptSignal->tMutex);
+    if(iRetVal != 0){
+        eError = ERROR_THREAD_ERROR;
+    }
     return eError;
 }
 
@@ -42,22 +46,28 @@ static Error_E SF_SignalWait(Signal_T *ptSignal){
 
 Error_E SignalLock(Signal_T *ptSignal){
     Error_E eError = ERROR_NONE;
-    pthread_mutex_lock(&ptSignal->tMutex);
+    int iRetVal = NULL;
+    iRetVal = pthread_mutex_lock(&ptSignal->tMutex);
+    if(iRetVal != 0){
+        eError = ERROR_THREAD_ERROR;
+    }
     return eError;
 }
 
 Error_E SignalUnLock(Signal_T *ptSignal){
     Error_E eError = ERROR_NONE;
-    pthread_mutex_unlock(&ptSignal->tMutex);
+    int iRetVal = NULL;
+    iRetVal = pthread_mutex_unlock(&ptSignal->tMutex);
+    if(iRetVal != 0){
+        eError = ERROR_THREAD_ERROR;
+    }
     return eError;
 }
 
 Error_E SignalWait(Signal_T *ptSignal){
     Error_E eError = ERROR_NONE;
     pthread_mutex_lock(&ptSignal->tMutex);
-
-    SF_SignalWait(ptSignal);
-
+    eError = SF_SignalWait(ptSignal);
     pthread_mutex_unlock(&ptSignal->tMutex);
     return eError;
 }
@@ -74,17 +84,23 @@ Error_E SignalWakeup(Signal_T *ptSignal){
 
 Error_E SignalBareWait(Signal_T *ptSignal){
     Error_E eError = ERROR_NONE;
-
-    pthread_cond_wait(&ptSignal->tCond, &ptSignal->tMutex);
+    int iRetVal = NULL;
+    iRetVal = pthread_cond_wait(&ptSignal->tCond, &ptSignal->tMutex);
+    if(iRetVal != 0){
+        eError = ERROR_THREAD_ERROR;
+    }
+    
 
     return eError;
 }
 
 Error_E SignalBareWakeup(Signal_T *ptSignal){
     Error_E eError = ERROR_NONE;
-
-    pthread_cond_signal(&ptSignal->tCond);
-
+    int iRetVal = NULL;
+    iRetVal = pthread_cond_signal(&ptSignal->tCond);
+    if(iRetVal != 0){
+        eError = ERROR_THREAD_ERROR;
+    }
     return eError;
 }
 

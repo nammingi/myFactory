@@ -14,4 +14,7 @@ typedef enum{
     FALSE = 0,
     TRUE
 } BOOL_E;
+
+
+void PrintError(Error_E eError, char *pstrFunc);
 #endif

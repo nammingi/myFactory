@@ -19,12 +19,12 @@ static Error_E SF_InitCond(Signal_T *ptSignal){
     if(iRetVal != 0){
         pthread_cond_init(&ptSignal->tCond,&tCondAttr);
     }
-    pthread_cond_destroy(&tCondAttr);
+    pthread_condattr_destroy(&tCondAttr);
     return eError;
 
 }
 
-static Error_E SF_InitMutex(Signal_T *ptSingal){
+static Error_E SF_InitMutex(Signal_T *ptSignal){
     Error_E eError = ERROR_NONE;
     pthread_mutexattr_t tMutexAttr;
     pthread_mutexattr_init(&tMutexAttr);
@@ -72,7 +72,7 @@ Error_E SignalWakeup(Signal_T *ptSignal){
     return eError;
 }
 
-Error_E SignalBarelWait(Signal_T *ptSignal){
+Error_E SignalBareWait(Signal_T *ptSignal){
     Error_E eError = ERROR_NONE;
 
     pthread_cond_wait(&ptSignal->tCond, &ptSignal->tMutex);

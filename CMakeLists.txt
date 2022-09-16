@@ -13,7 +13,7 @@ SET(SRC_FILES
 )
 
 ADD_LIBRARY( ${LIBRARY} SHARED ${SRC_FILES})
-ADD_EXECUTABLE(${TARGET_APP} testbed.c)
+ADD_EXECUTABLE(${TARGET_APP} MessageLibTest.c)
 
 find_package(Threads REQUIRED)
 

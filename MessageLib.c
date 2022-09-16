@@ -15,7 +15,7 @@ struct Message_T{
     uint32_t uiMessage;
 };
 
-typedef struct {
+struct MessageSt_T{
     Message_T *ptMeesage;
 
     pthread_t tThead;
@@ -24,17 +24,7 @@ typedef struct {
     LinkedList_IF_T *ptLinkedListIF;
 
     pfnMessageHandler fnMessageHandler;
-} MessageSt_T;
-
-typedef struct Message_IF_T{
-    MessageSt_T *ptMessageSt;
-    
-    Error_E (*SendMessage)(MessageSt_T *ptMessageSt, uint32_t uiMessage, void* pvParam); //함수포인터
-    Error_E (*PostMessage)(MessageSt_T *ptMessageSt, uint32_t uiMessage, void* pvParam); //함수포인터
-
-} Message_IF_T;
-
-
+};
 
 
 static Error_E SF_ProcessPostMessage(MessageSt_T *ptMessageSt, Message_T *ptMessage){
@@ -111,7 +101,7 @@ static Error_E SF_PostMessage(MessageSt_T *ptMessageSt, uint32_t uiMessage, void
 
     if(ptMessageSt != NULL){
         LinkedList_T *ptInsertedList;
-        LinkedList_IF_T *ptLinkedListIF = ptMessageSt->LinkedListIF;
+        LinkedList_IF_T *ptLinkedListIF = ptMessageSt->ptLinkedListIF;
 
         Message_T *ptMessage;
 
@@ -132,7 +122,7 @@ static Error_E SF_PostMessage(MessageSt_T *ptMessageSt, uint32_t uiMessage, void
             (void)SignalBareWakeup(ptMessageSt->ptSignal);
         }
 
-        (void)SignalUnlock(ptMessageSt->ptSignal);
+        (void)SignalUnLock(ptMessageSt->ptSignal);
         
 
         free(ptMessage);

@@ -34,5 +34,13 @@ LinkedList.h
 
 /home/B220660/study/architecture/myFactory/MessageLib.h
 
+/home/B220660/study/architecture/myFactory/Signal.c
+pthread.h
+-
+Common.h
+/home/B220660/study/architecture/myFactory/Common.h
+Signal.h
+/home/B220660/study/architecture/myFactory/Signal.h
+
 /home/B220660/study/architecture/myFactory/Signal.h
 

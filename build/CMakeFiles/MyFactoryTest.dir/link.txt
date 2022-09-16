@@ -1,1 +1,1 @@
-/usr/lib64/ccache/cc    CMakeFiles/MyFactoryTest.dir/testbed.c.o  -o MyFactoryTest  -Wl,-rpath,/home/B220660/study/architecture/myFactory/build libMy_Message.so -lpthread 
+/usr/lib64/ccache/cc    CMakeFiles/MyFactoryTest.dir/MessageLibTest.c.o  -o MyFactoryTest  -Wl,-rpath,/home/B220660/study/architecture/myFactory/build libMy_Message.so -lpthread 

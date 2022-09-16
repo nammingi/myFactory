@@ -57,27 +57,27 @@ include CMakeFiles/MyFactoryTest.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/MyFactoryTest.dir/flags.make
 
-CMakeFiles/MyFactoryTest.dir/testbed.c.o: CMakeFiles/MyFactoryTest.dir/flags.make
-CMakeFiles/MyFactoryTest.dir/testbed.c.o: ../testbed.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/B220660/study/architecture/myFactory/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/MyFactoryTest.dir/testbed.c.o"
-	/usr/lib64/ccache/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/MyFactoryTest.dir/testbed.c.o   -c /home/B220660/study/architecture/myFactory/testbed.c
+CMakeFiles/MyFactoryTest.dir/MessageLibTest.c.o: CMakeFiles/MyFactoryTest.dir/flags.make
+CMakeFiles/MyFactoryTest.dir/MessageLibTest.c.o: ../MessageLibTest.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/B220660/study/architecture/myFactory/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/MyFactoryTest.dir/MessageLibTest.c.o"
+	/usr/lib64/ccache/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/MyFactoryTest.dir/MessageLibTest.c.o   -c /home/B220660/study/architecture/myFactory/MessageLibTest.c
 
-CMakeFiles/MyFactoryTest.dir/testbed.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/MyFactoryTest.dir/testbed.c.i"
-	/usr/lib64/ccache/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/B220660/study/architecture/myFactory/testbed.c > CMakeFiles/MyFactoryTest.dir/testbed.c.i
+CMakeFiles/MyFactoryTest.dir/MessageLibTest.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/MyFactoryTest.dir/MessageLibTest.c.i"
+	/usr/lib64/ccache/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/B220660/study/architecture/myFactory/MessageLibTest.c > CMakeFiles/MyFactoryTest.dir/MessageLibTest.c.i
 
-CMakeFiles/MyFactoryTest.dir/testbed.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/MyFactoryTest.dir/testbed.c.s"
-	/usr/lib64/ccache/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/B220660/study/architecture/myFactory/testbed.c -o CMakeFiles/MyFactoryTest.dir/testbed.c.s
+CMakeFiles/MyFactoryTest.dir/MessageLibTest.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/MyFactoryTest.dir/MessageLibTest.c.s"
+	/usr/lib64/ccache/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/B220660/study/architecture/myFactory/MessageLibTest.c -o CMakeFiles/MyFactoryTest.dir/MessageLibTest.c.s
 
 # Object files for target MyFactoryTest
 MyFactoryTest_OBJECTS = \
-"CMakeFiles/MyFactoryTest.dir/testbed.c.o"
+"CMakeFiles/MyFactoryTest.dir/MessageLibTest.c.o"
 
 # External object files for target MyFactoryTest
 MyFactoryTest_EXTERNAL_OBJECTS =
 
-MyFactoryTest: CMakeFiles/MyFactoryTest.dir/testbed.c.o
+MyFactoryTest: CMakeFiles/MyFactoryTest.dir/MessageLibTest.c.o
 MyFactoryTest: CMakeFiles/MyFactoryTest.dir/build.make
 MyFactoryTest: libMy_Message.so
 MyFactoryTest: CMakeFiles/MyFactoryTest.dir/link.txt

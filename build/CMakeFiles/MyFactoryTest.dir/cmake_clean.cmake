@@ -1,5 +1,5 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/MyFactoryTest.dir/testbed.c.o"
+  "CMakeFiles/MyFactoryTest.dir/MessageLibTest.c.o"
   "MyFactoryTest"
   "MyFactoryTest.pdb"
 )

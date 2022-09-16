@@ -12,7 +12,7 @@ stdbool.h
 
 /home/B220660/study/architecture/myFactory/MessageLib.h
 
-/home/B220660/study/architecture/myFactory/testbed.c
+/home/B220660/study/architecture/myFactory/MessageLibTest.c
 stdio.h
 -
 stdbool.h

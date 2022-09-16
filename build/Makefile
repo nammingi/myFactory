@@ -136,6 +136,33 @@ My_Message/fast:
 	$(MAKE) -f CMakeFiles/My_Message.dir/build.make CMakeFiles/My_Message.dir/build
 .PHONY : My_Message/fast
 
+Common.o: Common.c.o
+
+.PHONY : Common.o
+
+# target to build an object file
+Common.c.o:
+	$(MAKE) -f CMakeFiles/My_Message.dir/build.make CMakeFiles/My_Message.dir/Common.c.o
+.PHONY : Common.c.o
+
+Common.i: Common.c.i
+
+.PHONY : Common.i
+
+# target to preprocess a source file
+Common.c.i:
+	$(MAKE) -f CMakeFiles/My_Message.dir/build.make CMakeFiles/My_Message.dir/Common.c.i
+.PHONY : Common.c.i
+
+Common.s: Common.c.s
+
+.PHONY : Common.s
+
+# target to generate assembly for a file
+Common.c.s:
+	$(MAKE) -f CMakeFiles/My_Message.dir/build.make CMakeFiles/My_Message.dir/Common.c.s
+.PHONY : Common.c.s
+
 LinkedList.o: LinkedList.c.o
 
 .PHONY : LinkedList.o
@@ -190,6 +217,33 @@ MessageLib.c.s:
 	$(MAKE) -f CMakeFiles/My_Message.dir/build.make CMakeFiles/My_Message.dir/MessageLib.c.s
 .PHONY : MessageLib.c.s
 
+MessageLibTest.o: MessageLibTest.c.o
+
+.PHONY : MessageLibTest.o
+
+# target to build an object file
+MessageLibTest.c.o:
+	$(MAKE) -f CMakeFiles/MyFactoryTest.dir/build.make CMakeFiles/MyFactoryTest.dir/MessageLibTest.c.o
+.PHONY : MessageLibTest.c.o
+
+MessageLibTest.i: MessageLibTest.c.i
+
+.PHONY : MessageLibTest.i
+
+# target to preprocess a source file
+MessageLibTest.c.i:
+	$(MAKE) -f CMakeFiles/MyFactoryTest.dir/build.make CMakeFiles/MyFactoryTest.dir/MessageLibTest.c.i
+.PHONY : MessageLibTest.c.i
+
+MessageLibTest.s: MessageLibTest.c.s
+
+.PHONY : MessageLibTest.s
+
+# target to generate assembly for a file
+MessageLibTest.c.s:
+	$(MAKE) -f CMakeFiles/MyFactoryTest.dir/build.make CMakeFiles/MyFactoryTest.dir/MessageLibTest.c.s
+.PHONY : MessageLibTest.c.s
+
 Signal.o: Signal.c.o
 
 .PHONY : Signal.o
@@ -217,33 +271,6 @@ Signal.c.s:
 	$(MAKE) -f CMakeFiles/My_Message.dir/build.make CMakeFiles/My_Message.dir/Signal.c.s
 .PHONY : Signal.c.s
 
-testbed.o: testbed.c.o
-
-.PHONY : testbed.o
-
-# target to build an object file
-testbed.c.o:
-	$(MAKE) -f CMakeFiles/MyFactoryTest.dir/build.make CMakeFiles/MyFactoryTest.dir/testbed.c.o
-.PHONY : testbed.c.o
-
-testbed.i: testbed.c.i
-
-.PHONY : testbed.i
-
-# target to preprocess a source file
-testbed.c.i:
-	$(MAKE) -f CMakeFiles/MyFactoryTest.dir/build.make CMakeFiles/MyFactoryTest.dir/testbed.c.i
-.PHONY : testbed.c.i
-
-testbed.s: testbed.c.s
-
-.PHONY : testbed.s
-
-# target to generate assembly for a file
-testbed.c.s:
-	$(MAKE) -f CMakeFiles/MyFactoryTest.dir/build.make CMakeFiles/MyFactoryTest.dir/testbed.c.s
-.PHONY : testbed.c.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -254,18 +281,21 @@ help:
 	@echo "... edit_cache"
 	@echo "... MyFactoryTest"
 	@echo "... My_Message"
+	@echo "... Common.o"
+	@echo "... Common.i"
+	@echo "... Common.s"
 	@echo "... LinkedList.o"
 	@echo "... LinkedList.i"
 	@echo "... LinkedList.s"
 	@echo "... MessageLib.o"
 	@echo "... MessageLib.i"
 	@echo "... MessageLib.s"
+	@echo "... MessageLibTest.o"
+	@echo "... MessageLibTest.i"
+	@echo "... MessageLibTest.s"
 	@echo "... Signal.o"
 	@echo "... Signal.i"
 	@echo "... Signal.s"
-	@echo "... testbed.o"
-	@echo "... testbed.i"
-	@echo "... testbed.s"
 .PHONY : help
 
 

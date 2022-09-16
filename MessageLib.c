@@ -16,7 +16,7 @@ struct Message_T{
 };
 
 struct MessageSt_T{
-    Message_T *ptMeesage;
+    Message_T *ptMessage;
 
     pthread_t tThead;
 
@@ -31,23 +31,23 @@ static Error_E SF_ProcessPostMessage(MessageSt_T *ptMessageSt, Message_T *ptMess
 
 }
 static void SF_MessageThread(MessageSt_T *ptMessageSt){
+    printf("This is MessageThread..");
     Error_E eError = ERROR_NONE;
 
     LinkedList_IF_T *ptLinkedList_IF;
     LinkedListSt_T *ptListSt;
     LinkedList_T *ptList;
-    
 
     ptLinkedList_IF = ptMessageSt->ptLinkedListIF;
     ptListSt = ptLinkedList_IF->ptListSt;
-
+    
     (void)SignalLock(ptMessageSt->ptSignal);
-
+    printf("Lock! %s at %s\n", __func__);
     
     if(ptLinkedList_IF->GetListCount(ptListSt) == 0){
+        printf("No list data. so Wait! at %s\n", __func__);
         SignalBareWait(ptMessageSt->ptSignal);
     }
-
     
     // 리스트에서 맨 앞 리스트 가져옴
     ptList = ptLinkedList_IF->GetFirstList(ptListSt);
@@ -58,14 +58,15 @@ static void SF_MessageThread(MessageSt_T *ptMessageSt){
 
         pstrListName = ptLinkedList_IF->GetListName(ptList);
         // 가져온 리스트 네임 비교
-        /*
+        
+        printf("chieck? at %s\n", __func__);
         if(strcmp(pstrListName, "post") == 0){
-
-            Message_T *tMessage = (tMessage*)LinkedList_IF_T->GetListData(ptList);
-            SF_ProcessPostMessage(ptMessageSt, tMeesage);
+            printf("this is post thread\n");
+            //Message_T *tMessage = (tMessage*)LinkedList_IF_T->GetListData(ptList);
+            //SF_ProcessPostMessage(ptMessageSt, tMessage);
         }else{
             
-        }*/
+        }
 
     }
     
@@ -78,6 +79,7 @@ static void SF_MessageThread(MessageSt_T *ptMessageSt){
 }
 
 static Error_E SF_CreateMessageThread(MessageSt_T *ptMessageSt){
+    
     Error_E eRetVal = ERROR_NONE;
     void* pvParam;
     int iRetVal;
@@ -85,10 +87,31 @@ static Error_E SF_CreateMessageThread(MessageSt_T *ptMessageSt){
     iRetVal = pthread_create(&ptMessageSt->tThead, NULL, SF_MessageThread, ptMessageSt);// needed pthrad_t, threadCallbackFn, Parameters
     
     if(iRetVal == 0){ //normal
-
+        printf("Created Message Thread\n");
     }
     
     return eRetVal;
+}
+
+static Error_E SF_DestroyMessageThread(MessageSt_T *ptMessageSt){
+    Error_E eError = ERROR_NONE;
+
+    if(ptMessageSt != NULL){
+
+        int iRetVal = NULL; 
+
+        (void)SignalWakeup(ptMessageSt->ptSignal); //JP
+
+        iRetVal = pthread_join(ptMessageSt->tThead, NULL);
+
+        if(iRetVal != 0){
+            eError = ERROR_THREAD_ERROR;
+        }
+    }else{
+        eError = ERROR_BAD_PARAMETER;
+    }
+    
+    return eError;
 }
 
 static Error_E SF_SendMessage(MessageSt_T *ptMessageSt, uint32_t uiMessage, void* pvParam){
@@ -96,7 +119,7 @@ static Error_E SF_SendMessage(MessageSt_T *ptMessageSt, uint32_t uiMessage, void
 }
 
 static Error_E SF_PostMessage(MessageSt_T *ptMessageSt, uint32_t uiMessage, void* pvParam){
-    
+    printf("PMsg called\n");
     Error_E eError = ERROR_NONE;
 
     if(ptMessageSt != NULL){
@@ -115,11 +138,15 @@ static Error_E SF_PostMessage(MessageSt_T *ptMessageSt, uint32_t uiMessage, void
         }
 
         (void)SignalLock(ptMessageSt->ptSignal);
-
+        printf("Lock! at %s\n", __func__);
         ptInsertedList = ptLinkedListIF->InsertList(ptLinkedListIF->ptListSt, "post", ptMessage, sizeof(ptMessage));
 
         if(ptInsertedList != NULL){
-            (void)SignalBareWakeup(ptMessageSt->ptSignal);
+            printf("Woke up! at %s\n", __func__);
+            eError = SignalBareWakeup(ptMessageSt->ptSignal);
+            PrintError(eError, __func__);
+        }else{
+            eError = ERROR_INSUFFICIENT_RESOURCE;
         }
 
         (void)SignalUnLock(ptMessageSt->ptSignal);
@@ -128,46 +155,78 @@ static Error_E SF_PostMessage(MessageSt_T *ptMessageSt, uint32_t uiMessage, void
         free(ptMessage);
     }else{
         eError = ERROR_BAD_PARAMETER;
+        PrintError(eError, __func__);
     }
     
     return eError;
 }
 
 Message_IF_T* CreateMessage(pfnMessageHandler fnMessageHandler){
+    
     Message_IF_T *ptRetIF;
-    Error_E eError;
-    ptRetIF = (Message_IF_T*)malloc(sizeof(Message_IF_T));
+    
+    ptRetIF = (Message_IF_T*)calloc(1UL, sizeof(Message_IF_T));
     
     if(ptRetIF != NULL){
-        MessageSt_T *ptMessageSt;
-        ptMessageSt = (MessageSt_T*)malloc(sizeof(ptMessageSt));
 
-        ptMessageSt->ptSignal = CreateSignal();
-        ptMessageSt->ptLinkedListIF = CreateList();
+        Error_E eError;
 
-        if((ptMessageSt->ptSignal != NULL) && (ptMessageSt->ptLinkedListIF != NULL)){
-            ptMessageSt->fnMessageHandler = fnMessageHandler;
+        ptRetIF->ptMessageSt = (MessageSt_T*)calloc(1UL, sizeof(MessageSt_T));
+
+        if(ptRetIF->ptMessageSt != NULL){
+
+            MessageSt_T *ptMessageSt = ptRetIF->ptMessageSt;
+
+            ptMessageSt->ptSignal = CreateSignal();
+            ptMessageSt->ptLinkedListIF = CreateList();
+
+            if((ptMessageSt->ptSignal != NULL) && (ptMessageSt->ptLinkedListIF != NULL)){
+
+                ptMessageSt->fnMessageHandler = fnMessageHandler;
+                
+                ptRetIF->SendMessage = SF_SendMessage;
+                ptRetIF->PostMessage = SF_PostMessage;
+
+                eError = SF_CreateMessageThread(ptRetIF->ptMessageSt);
             
-            ptRetIF->SendMessage = SF_SendMessage;
-            ptRetIF->PostMessage = SF_PostMessage;
-
-            eError = SF_CreateMessageThread(ptMessageSt);
+            }else{
+                eError = ERROR_INSUFFICIENT_RESOURCE;
+            }
         }else{
             eError = ERROR_INSUFFICIENT_RESOURCE;
         }
-    }else{
-        eError = ERROR_INSUFFICIENT_RESOURCE;
-    }
 
-    if(eError != ERROR_NONE){
-        DestroyMessage(ptRetIF);
-        ptRetIF = NULL;
+        if(eError != ERROR_NONE){
+            PrintError(eError, __func__);
+            DestroyMessage(ptRetIF);
+            ptRetIF = NULL;
+        }
     }
 
     return ptRetIF;
 
 }
 
-Error_E DestroyMessage(Message_IF_T *ptMeesageIF){
+Error_E DestroyMessage(Message_IF_T *ptMessageIF){
+    Error_E eError = ERROR_NONE;
+
+    if(ptMessageIF != NULL){
+        if(ptMessageIF->ptMessageSt != NULL){
+            MessageSt_T *ptMessageSt = ptMessageIF->ptMessageSt;
+            
+            eError = SF_DestroyMessageThread(ptMessageSt);
+
+            DestroySignal(ptMessageSt->ptSignal);
+            
+            DestroyList(ptMessageSt->ptLinkedListIF);
+            
+            free(ptMessageIF->ptMessageSt);
+        }
+        //free(ptMessageIF);
+
+    }else{
+        eError = ERROR_BAD_PARAMETER;
+    }
+    return eError;
 
 }

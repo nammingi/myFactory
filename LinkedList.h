@@ -26,5 +26,5 @@ typedef struct {
 } LinkedList_IF_T;
 
 LinkedList_IF_T *CreateList(void);
-
+Error_E DestroyList(LinkedList_IF_T *ptListIF);
 #endif

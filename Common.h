@@ -8,6 +8,8 @@ typedef enum{
     ERROR_BAD_PARAMETER,
     ERROR_INSUFFICIENT_RESOURCE,
     ERROR_THREAD_ERROR,
+    ERROR_SIGNAL,
+    
 
 } Error_E;
 

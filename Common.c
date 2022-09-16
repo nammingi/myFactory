@@ -3,7 +3,7 @@
 #include "Common.h"
 
 void PrintError(Error_E eError, char *pstrFunc){
-    if(eError != NULL){
+    if(eError){
         switch(eError){
             case ERROR_NONE:
                 printf("ERROR_NONE, at func[%s]\n", pstrFunc);

@@ -6,13 +6,23 @@
 
 #IncludeRegexTransform: 
 
-/home/B220660/study/architecture/myFactory/Common.c
-stdio.h
--
-Common.h
-/home/B220660/study/architecture/myFactory/Common.h
-
 /home/B220660/study/architecture/myFactory/Common.h
 stdbool.h
 -
+
+/home/B220660/study/architecture/myFactory/LinkedList.c
+stdio.h
+-
+stdlib.h
+-
+stdint.h
+-
+string.h
+-
+Common.h
+/home/B220660/study/architecture/myFactory/Common.h
+LinkedList.h
+/home/B220660/study/architecture/myFactory/LinkedList.h
+
+/home/B220660/study/architecture/myFactory/LinkedList.h
 

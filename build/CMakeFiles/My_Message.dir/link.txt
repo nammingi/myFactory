@@ -1,1 +1,1 @@
-/usr/lib64/ccache/cc -fPIC   -shared -Wl,-soname,libMy_Message.so -o libMy_Message.so CMakeFiles/My_Message.dir/LinkedList.c.o CMakeFiles/My_Message.dir/MessageLib.c.o CMakeFiles/My_Message.dir/Signal.c.o CMakeFiles/My_Message.dir/Common.c.o 
+/usr/lib64/ccache/cc -fPIC -O2 -g -DNDEBUG  -shared -Wl,-soname,libMy_Message.so -o libMy_Message.so CMakeFiles/My_Message.dir/LinkedList.c.o CMakeFiles/My_Message.dir/MessageLib.c.o CMakeFiles/My_Message.dir/Signal.c.o CMakeFiles/My_Message.dir/Common.c.o 

@@ -19,6 +19,7 @@ int main()
     pfnMessageHandler pfnMessageHandler = fnMessageHandler;
 
     printf("[Main Started]\n");
+    
     Message_IF_T *ptMessageIF;
     ptMessageIF = CreateMessage(pfnMessageHandler);
 

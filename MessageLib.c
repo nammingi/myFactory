@@ -103,7 +103,7 @@ static void SF_MessageThread(MessageSt_T *ptMessageSt)
             }
 
             ptList = ptLinkedList_IF->GetFirstList(ptListSt);
-            printf(">> Msg Thread, While Syntax, FirstList loaded. >>%d\n", ptList);
+            printf(">> Msg Thread, While Syntax, First List of %d List loaded. >> %d\n",ptLinkedList_IF->GetListCount(ptListSt), ptList);
             if(ptList != NULL)
             {
                 char* pstrListName;

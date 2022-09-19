@@ -18,18 +18,26 @@ int main()
 
     pfnMessageHandler pfnMessageHandler = fnMessageHandler;
 
-    printf("started\n");
+    printf("[Main Started]\n");
     Message_IF_T *ptMessageIF;
     ptMessageIF = CreateMessage(pfnMessageHandler);
 
     ptMessageIF->PostMessage(ptMessageIF->ptMessageSt, 1234, NULL);
+
+    ptMessageIF->PostMessage(ptMessageIF->ptMessageSt, 5678, NULL);
+
+    ptMessageIF->PostMessage(ptMessageIF->ptMessageSt, 2337, NULL);
+
+    //ptMessageIF->SendMessage(ptMessageIF->ptMessageSt, 8237, NULL);
     
-    printf("done\n");
+    printf("[All MSG Inserted]\n");
 
     sleep(1);
 
     eError = DestroyMessage(ptMessageIF);
     
+    printf("DES???\n");
+
     return eError;
 
 }

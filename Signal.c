@@ -83,9 +83,7 @@ Error_E SignalWait(Signal_T *ptSignal){
     Error_E eError = ERROR_NONE;
     if(ptSignal != NULL){
         (void)pthread_mutex_lock(&ptSignal->tMutex);
-        printf("locked and wait....");
         eError = SF_SignalWait(ptSignal);
-        printf("being..\n");
         (void)pthread_mutex_unlock(&ptSignal->tMutex);
     }else{
         eError = ERROR_BAD_PARAMETER;

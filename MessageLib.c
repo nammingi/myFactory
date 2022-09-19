@@ -14,16 +14,22 @@
 
 struct MessageSt_T
 {
-    Message_T *ptMessage;
-
+    BOOL_E bDestroyed;
     pthread_t tThead;
 
     Signal_T *ptSignal;
+
     LinkedList_IF_T *ptLinkedListIF;
 
     pfnMessageHandler fnMessageHandler;
 };
 
+typedef struct 
+{
+    Signal_T *ptSignal;
+    Message_T *ptMessage;
+
+} SendMessage_T;
 
 static Error_E SF_ProcessPostMessage(MessageSt_T *ptMessageSt, Message_T *ptMessage)
 {
@@ -43,7 +49,30 @@ static Error_E SF_ProcessPostMessage(MessageSt_T *ptMessageSt, Message_T *ptMess
     }
     else
     {
-        
+        eError = ERROR_BAD_PARAMETER;
+    }
+
+    return eError;
+}
+
+static Error_E SF_ProcessSendMessage(MessageSt_T *ptMessageSt, SendMessage_T *ptSendMessage)
+{
+    Error_E eError = ERROR_NONE;
+
+    if((ptMessageSt != NULL) && (ptSendMessage != NULL))
+    {
+        if(ptMessageSt->fnMessageHandler != NULL)
+        {
+            ptMessageSt->fnMessageHandler(ptSendMessage->ptMessage);
+        }
+        else
+        {
+            eError = ERROR_BAD_PARAMETER;
+        }
+        (void)SignalWakeup(ptSendMessage->ptSignal);
+    }
+    else
+    {
         eError = ERROR_BAD_PARAMETER;
     }
 
@@ -51,47 +80,57 @@ static Error_E SF_ProcessPostMessage(MessageSt_T *ptMessageSt, Message_T *ptMess
 }
 static void SF_MessageThread(MessageSt_T *ptMessageSt)
 {
-    Error_E eError = ERROR_NONE;
-
-    LinkedList_IF_T *ptLinkedList_IF;
-    LinkedListSt_T *ptListSt;
-    LinkedList_T *ptList;
-
-    ptLinkedList_IF = ptMessageSt->ptLinkedListIF;
-    ptListSt = ptLinkedList_IF->ptListSt;
-    
-    (void)SignalLock(ptMessageSt->ptSignal);
-    
-    if(ptLinkedList_IF->GetListCount(ptListSt) == 0)
+    if(ptMessageSt != NULL)
     {
-        SignalBareWait(ptMessageSt->ptSignal);
-    }
-    
-    // 리스트에서 맨 앞 리스트 가져옴
-    ptList = ptLinkedList_IF->GetFirstList(ptListSt);
+        printf(">> MSG Thread, CALLED\n");
+        const LinkedList_IF_T *ptLinkedList_IF;
+        LinkedListSt_T *ptListSt;
+        LinkedList_T *ptList;
 
-    // 가져온 리스트에 대해 리스트네임 가져옴
-    if(ptList != NULL)
-    {
-        char* pstrListName;
-
-        pstrListName = ptLinkedList_IF->GetListName(ptList);
-        // 가져온 리스트 네임 비교
+        ptLinkedList_IF = ptMessageSt->ptLinkedListIF;
+        ptListSt = ptLinkedList_IF->ptListSt;
         
-        if(strcmp(pstrListName, "post") == 0)
-        {
-            Message_T *tMessage = ptLinkedList_IF->GetListData(ptList);
-            
-            SF_ProcessPostMessage(ptMessageSt, tMessage);
-            
-        }
-        else
-        {
-            
-        }
+        int whileCnt=0;
+        while(ptMessageSt->bDestroyed == FALSE)
+        {   
+            printf(">> MSG Thread, While Syntax, %d times repeated.\n",++whileCnt);
+            (void)SignalLock(ptMessageSt->ptSignal);
+            printf(">> Msg Thread, While Syntax, Signal LOCKED\n");
+            if(ptLinkedList_IF->GetListCount(ptListSt) == 0)
+            {
+                printf(">> Msg Thread, While Syntax, BareWaiting..\n");
+                (void)SignalBareWait(ptMessageSt->ptSignal);
+            }
 
+            ptList = ptLinkedList_IF->GetFirstList(ptListSt);
+            printf(">> Msg Thread, While Syntax, FirstList loaded. >>%d\n", ptList);
+            if(ptList != NULL)
+            {
+                char* pstrListName;
+
+                pstrListName = ptLinkedList_IF->GetListName(ptList);
+                printf(">> Msg Thread, While Syntax, Now ListName is [%s]\n",pstrListName);
+                if(strcmp(pstrListName, "post") == 0)
+                {
+                    Message_T *tMessage = ptLinkedList_IF->GetListData(ptList);
+                    
+                    SF_ProcessPostMessage(ptMessageSt, tMessage);    
+                }
+
+                if(strcmp(pstrListName, "Send") == 0)
+                {
+                    Message_T *tMessage = ptLinkedList_IF->GetListData(ptList);
+
+                    SF_ProcessSendMessage(ptMessageSt, tMessage);
+                }
+
+                printf(">> Msg Thread, While Syntax, previous Signal UnLOCKING\n");
+                (void)SignalUnLock(ptMessageSt->ptSignal);
+                printf(">> MSG Thread, While Syntax, Signal UnLOCKED\n");
+            
+            }
+        }
     }
-
     // 언락?
     
     
@@ -120,12 +159,13 @@ static Error_E SF_DestroyMessageThread(MessageSt_T *ptMessageSt)
 
     if(ptMessageSt != NULL)
     {
-
         int iRetVal = NULL; 
 
         (void)SignalWakeup(ptMessageSt->ptSignal); //JP
 
         iRetVal = pthread_join(ptMessageSt->tThead, NULL);
+
+        ptMessageSt->bDestroyed = TRUE;
 
         if(iRetVal != 0)
         {
@@ -142,7 +182,59 @@ static Error_E SF_DestroyMessageThread(MessageSt_T *ptMessageSt)
 
 static Error_E SF_SendMessage(MessageSt_T *ptMessageSt, uint32_t uiMessage, void* pvParam)
 {
+    int cnt=0;
+    Error_E eError = ERROR_NONE;
+    
+    if(ptMessageSt != NULL)
+    {
+        SendMessage_T tSendMessage;
+        LinkedList_T *ptInsertedList;
+        LinkedList_IF_T *ptListIF = ptMessageSt->ptLinkedListIF;
+        
+        Message_T *ptMessage;
+        ptMessage = (Message_T *)calloc(1UL, sizeof(Message_T));
 
+        if(ptMessage != NULL)
+        {
+            ptMessage->uiMessage    = uiMessage;
+            ptMessage->pvParam      = pvParam;
+        }
+
+        tSendMessage.ptMessage = ptMessage;
+        tSendMessage.ptSignal = CreateSignal();
+
+        (void)SignalLock(ptMessageSt->ptSignal);
+
+        ptInsertedList = ptListIF->InsertListFisrt(ptListIF->ptListSt, "Send", &tSendMessage, sizeof(SendMessage_T));
+
+        if(ptInsertedList != NULL)
+        {
+            printf("1\n");
+            (void)SignalLock(tSendMessage.ptSignal);
+            printf("2\n");
+            (void)SignalBareWakeup(ptMessageSt->ptSignal);
+            printf("3\n");
+            (void)SignalUnLock(ptMessageSt->ptSignal);
+            printf("4\n");
+            (void)SignalBareWait(tSendMessage.ptSignal);
+            printf("5\n");
+            (void)SignalUnLock(tSendMessage.ptSignal);
+            printf("6\n");
+            (void)DestroySignal(tSendMessage.ptSignal);
+            printf("7\n");
+        }
+        else
+        {
+            (void)SignalUnLock(ptMessageSt->ptSignal);
+
+            (void)DestroySignal(tSendMessage.ptSignal);
+
+            eError = ERROR_INSUFFICIENT_RESOURCE;
+        }
+        
+    return eError;
+
+    }
 }
 
 static Error_E SF_PostMessage(MessageSt_T *ptMessageSt, uint32_t uiMessage, void* pvParam)
@@ -163,8 +255,8 @@ static Error_E SF_PostMessage(MessageSt_T *ptMessageSt, uint32_t uiMessage, void
             ptMessage->pvParam = pvParam;
             ptMessage->uiMessage = uiMessage;
         }
-
         (void)SignalLock(ptMessageSt->ptSignal);
+        printf(">> PostMSG, Signal LOCKED\n");
 
         ptInsertedList = ptLinkedListIF->InsertList(ptLinkedListIF->ptListSt, "post", ptMessage, sizeof(Message_T));
 
@@ -178,7 +270,7 @@ static Error_E SF_PostMessage(MessageSt_T *ptMessageSt, uint32_t uiMessage, void
         }
 
         (void)SignalUnLock(ptMessageSt->ptSignal);
-
+        printf(">> PostMSG, Signal UnLOCKED\n");
 
         free(ptMessage);
     }
@@ -210,6 +302,7 @@ Message_IF_T* CreateMessage(pfnMessageHandler fnMessageHandler)
 
             MessageSt_T *ptMessageSt = ptRetIF->ptMessageSt;
 
+            ptMessageSt->bDestroyed = FALSE;
             ptMessageSt->ptSignal = CreateSignal();
             ptMessageSt->ptLinkedListIF = CreateList();
 
@@ -259,13 +352,11 @@ Error_E DestroyMessage(Message_IF_T *ptMessageIF)
             eError = SF_DestroyMessageThread(ptMessageSt);
 
             DestroySignal(ptMessageSt->ptSignal);
-            
             DestroyList(ptMessageSt->ptLinkedListIF);
             
             free(ptMessageIF->ptMessageSt);
         }
-        //free(ptMessageIF);
-
+        free(ptMessageIF);
     }
     else
     {

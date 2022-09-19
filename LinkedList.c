@@ -108,11 +108,11 @@ static void *SF_GetListData(LinkedList_T *ptList)
 
 static uint32_t SF_GetListDataSize(LinkedList_T *ptList)
 {
-    uint32_t riDataSize = 0UL;
+    uint32_t iDataSize = 0UL;
 
-    riDataSize = ptList->iDataSize;
+    iDataSize = ptList->iDataSize;
 
-    return riDataSize;
+    return iDataSize;
 }
 
 static LinkedList_T *SF_InsertList(LinkedListSt_T *ptListSt, char* pstrListName, void* pvData, uint32_t iDataSize)
@@ -121,9 +121,11 @@ static LinkedList_T *SF_InsertList(LinkedListSt_T *ptListSt, char* pstrListName,
     Error_E eError = ERROR_NONE;
 
     LinkedList_T *ptNewList = NULL;
+
     ptNewList = (LinkedList_T *)calloc(1UL, sizeof(LinkedList_T));
 
     LinkedList_T *ptOldList = ptListSt->ptTail;
+
     ptOldList->ptPrev->ptNext = ptNewList;
     ptNewList->ptPrev         = ptOldList->ptPrev;
     ptOldList->ptPrev         = ptNewList;
@@ -138,15 +140,18 @@ static LinkedList_T *SF_InsertList(LinkedListSt_T *ptListSt, char* pstrListName,
 
 static LinkedList_T *SF_InsertListFirst(LinkedListSt_T *ptListSt, char* pstrListName, void* pvData, uint32_t iDataSize)
 {
-    
     Error_E eError = ERROR_NONE;
 
     LinkedList_T *ptNewFirstList;
+    
     ptNewFirstList = (LinkedList_T *)calloc(1UL, sizeof(LinkedList_T));
+    
     SF_SetListName(ptNewFirstList, pstrListName);
+
     SF_SetListData(ptNewFirstList, pvData, iDataSize);
 
     LinkedList_T *ptOldList = ptListSt->ptHead;
+
     ptOldList->ptNext->ptPrev       = ptNewFirstList;
     ptNewFirstList->ptPrev          = ptOldList;
     ptNewFirstList->ptNext          = ptOldList->ptNext;
@@ -197,17 +202,16 @@ static Error_E SF_DeleteList(LinkedList_T *ptList)
 
         if(eError == ERROR_NONE)
         {
-
             eError = SF_DeleteListName(ptList);      
 
             if(eError == ERROR_NONE)
             {
-
                 free(ptList);
             }
         }
 
-    }else
+    }
+    else
     {
         eError = ERROR_BAD_PARAMETER;
     }
@@ -228,7 +232,8 @@ static Error_E SF_DeleteListAll(LinkedListSt_T *ptListSt)
             eError = SF_DeleteList(ptList);
             ptList = ptList->ptNext;
         }
-    }else
+    }
+    else
     {
         eError = ERROR_BAD_PARAMETER;
     }
@@ -237,7 +242,7 @@ static Error_E SF_DeleteListAll(LinkedListSt_T *ptListSt)
 
 static int SF_GetListCount(LinkedListSt_T *ptListSt)
 {
-    int iRetVal=0;
+    int iRetVal = 0;
     LinkedList_T *ptList;
     if(ptListSt != NULL)
     {
@@ -248,7 +253,8 @@ static int SF_GetListCount(LinkedListSt_T *ptListSt)
             if(SF_IsListTail(ptListSt, ptList) == FALSE )
             {
                 return 0;
-            }else
+            }
+            else
             {
                 while(ptList != ptListSt->ptTail)
                 {
@@ -257,11 +263,13 @@ static int SF_GetListCount(LinkedListSt_T *ptListSt)
                 }
                 return iRetVal;
             }
-        }else
+        }
+        else
         {
             return -1;
         }
-    }else
+    }
+    else
     {
         return -1;
     }
@@ -283,7 +291,8 @@ static Error_E SF_TermList(LinkedListSt_T *ptListSt)
 
         //free(ptListSt);
 
-    }else
+    }
+    else
     {
         eError = ERROR_BAD_PARAMETER;
     }

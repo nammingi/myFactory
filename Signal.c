@@ -134,9 +134,7 @@ Error_E SignalBareWakeup(Signal_T *ptSignal){
     int iRetVal = NULL;
 
     if(ptSignal != NULL){
-        printf("before signal\n");
         iRetVal = pthread_cond_signal(&ptSignal->tCond);
-        printf("after signal\n");
 
         if(iRetVal != 0){
             eError = ERROR_SIGNAL;

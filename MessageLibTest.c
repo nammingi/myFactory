@@ -7,24 +7,26 @@
 #include "Common.h"
 #include "MessageLib.h"
 
-int32_t fnMessageHandler(Message_T *ptMessage){
-    printf(">> This is msg handler\n");
+int32_t fnMessageHandler(Message_T *ptMessage)
+{
+    printf(">> This is msg handler\n%u\n", ptMessage->uiMessage);
 }
 
-int main(){
+int main()
+{
     Error_E eError = ERROR_NONE;
 
-    pfnMessageHandler fnMessageHandler = fnMessageHandler;
+    pfnMessageHandler pfnMessageHandler = fnMessageHandler;
 
     printf("started\n");
     Message_IF_T *ptMessageIF;
-    ptMessageIF = CreateMessage(fnMessageHandler);
+    ptMessageIF = CreateMessage(pfnMessageHandler);
 
     ptMessageIF->PostMessage(ptMessageIF->ptMessageSt, 1234, NULL);
     
     printf("done\n");
 
-    sleep(2);
+    sleep(1);
 
     eError = DestroyMessage(ptMessageIF);
     

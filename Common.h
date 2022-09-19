@@ -4,7 +4,7 @@
 #include <stdbool.h>
 
 typedef enum{
-    ERROR_NONE=0,
+    ERROR_NONE=1,
     ERROR_BAD_PARAMETER,
     ERROR_INSUFFICIENT_RESOURCE,
     ERROR_THREAD_ERROR,

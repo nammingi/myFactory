@@ -1,7 +1,11 @@
 #ifndef MESSAGELIB_H_
 #define MESSAGELIB_H_
 
-typedef struct Message_T Message_T;
+typedef struct
+{
+    void* pvParam;
+    uint32_t uiMessage;
+} Message_T;
 typedef struct MessageSt_T MessageSt_T;
 
 typedef int32_t (*pfnMessageHandler)(Message_T *ptMessage);

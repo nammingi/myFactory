@@ -14,12 +14,18 @@ void PrintError(Error_E eError, char *pstrFunc){
             case ERROR_INSUFFICIENT_RESOURCE:
                 printf("ERROR_INSUFFICIENT_RESOURCE, at func[%s]\n", pstrFunc);
                 break;
-            
+            case ERROR_THREAD_ERROR:
+                printf("ERROR_THREAD_ERROR, at func[%s]\n", pstrFunc);
+                break;
+            case ERROR_SIGNAL:
+                printf("ERROR_SIGNAL, at func[%s]\n", pstrFunc);
+                break;
+
             default:
                 printf("[Unkown Error], at func[%s]\n", pstrFunc);
                 break;
         }
     }else{
-        printf(" Print error occured : ERROR_BAD_PARAMETER, at func[%s]\n", pstrFunc);
+        printf(">> Print error occured : [%d]ERROR_BAD_PARAMETER, at func[%s]\n", eError, pstrFunc);
     }
 }

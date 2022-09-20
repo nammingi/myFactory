@@ -250,7 +250,8 @@ static Error_E SF_SendMessage(MessageSt_T *ptMessageSt, uint32_t uiMessage, void
 
             eError = ERROR_INSUFFICIENT_RESOURCE;
         }
-        
+
+    free(ptMessage);
     return eError;
 
     }

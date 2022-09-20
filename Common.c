@@ -2,9 +2,18 @@
 
 #include "Common.h"
 
-void PrintError(Error_E eError, char *pstrFunc){
-    if(eError){
-        switch(eError){
+inline void CheckDebugPoint(char* _func_)
+{
+    printf("[Debug point] Function [%s] has called.\n",_func_);
+}
+
+
+void PrintError(Error_E eError, char *pstrFunc)
+{
+    if(eError)
+    {
+        switch(eError)
+        {
             case ERROR_NONE:
                 printf("ERROR_NONE, at func[%s]\n", pstrFunc);
                 break;
@@ -25,7 +34,9 @@ void PrintError(Error_E eError, char *pstrFunc){
                 printf("[Unkown Error], at func[%s]\n", pstrFunc);
                 break;
         }
-    }else{
+    }
+    else
+    {
         printf(">> Print error occured : [%d]ERROR_BAD_PARAMETER, at func[%s]\n", eError, pstrFunc);
     }
 }

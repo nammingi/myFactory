@@ -3,6 +3,8 @@
 
 #include <stdbool.h>
 
+
+
 typedef enum{
     ERROR_NONE=1,
     ERROR_BAD_PARAMETER,
@@ -18,6 +20,6 @@ typedef enum{
     TRUE
 } BOOL_E;
 
-
+void CheckDebugPoint(char* _func_);
 void PrintError(Error_E eError, char *pstrFunc);
 #endif

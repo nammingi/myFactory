@@ -9,7 +9,9 @@
 
 int32_t fnMessageHandler(Message_T *ptMessage)
 {
-    printf(">> This is msg handler\n%u\n", ptMessage->uiMessage);
+    printf("[Debug point] This is msg handler\n%u\n", ptMessage->uiMessage);
+
+    return 0;
 }
 
 int main()
@@ -23,13 +25,13 @@ int main()
     Message_IF_T *ptMessageIF;
     ptMessageIF = CreateMessage(pfnMessageHandler);
 
-    ptMessageIF->PostMessage(ptMessageIF->ptMessageSt, 1234, NULL);
+    ptMessageIF->PostMessage(ptMessageIF->ptMessageSt, 1111, NULL);
 
-    ptMessageIF->PostMessage(ptMessageIF->ptMessageSt, 5678, NULL);
+    ptMessageIF->PostMessage(ptMessageIF->ptMessageSt, 2222, NULL);
 
-    ptMessageIF->PostMessage(ptMessageIF->ptMessageSt, 2337, NULL);
+    ptMessageIF->PostMessage(ptMessageIF->ptMessageSt, 3333, NULL);
 
-    //ptMessageIF->SendMessage(ptMessageIF->ptMessageSt, 8237, NULL);
+    ptMessageIF->SendMessage(ptMessageIF->ptMessageSt, 4444, NULL);
     
     printf("[All MSG Inserted]\n");
 

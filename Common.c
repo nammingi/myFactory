@@ -4,13 +4,13 @@
 
 inline void CheckDebugPoint(char* _func_)
 {
-    printf("[Debug point] Function [%s] has called.\n",_func_);
+    printf("[Debug point] Function [%-20s] has called.\n",_func_);
 }
 
 
 void PrintError(Error_E eError, char *pstrFunc)
 {
-    if(eError)
+    if(eError != NULL)
     {
         switch(eError)
         {

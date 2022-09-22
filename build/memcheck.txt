@@ -1,445 +1,445 @@
-==22283== Memcheck, a memory error detector
-==22283== Copyright (C) 2002-2013, and GNU GPL'd, by Julian Seward et al.
-==22283== Using Valgrind-3.9.0 and LibVEX; rerun with -h for copyright info
-==22283== Command: ./MyFactoryTest
-==22283== Parent PID: 19554
-==22283== 
---22283-- 
---22283-- Valgrind options:
---22283--    --leak-check=full
---22283--    --log-file=memcheck.txt
---22283--    -v
---22283--    --error-limit=no
---22283-- Contents of /proc/version:
---22283--   Linux version 3.19.8-100.fc20.x86_64 (mockbuild@bkernel01.phx2.fedoraproject.org) (gcc version 4.8.3 20140911 (Red Hat 4.8.3-7) (GCC) ) #1 SMP Tue May 12 17:08:50 UTC 2015
---22283-- Arch and hwcaps: AMD64, amd64-cx16-lzcnt-rdtscp-sse3-avx-avx2-bmi
---22283-- Page sizes: currently 4096, max supported 4096
---22283-- Valgrind library directory: /usr/lib64/valgrind
---22283-- Reading syms from /home/B220660/study/architecture/myFactory/build/MyFactoryTest
---22283-- Reading syms from /usr/lib64/valgrind/memcheck-amd64-linux
---22283--    object doesn't have a symbol table
---22283--    object doesn't have a dynamic symbol table
---22283-- Reading syms from /usr/lib64/ld-2.18.so
---22283-- Scheduler: using generic scheduler lock implementation.
---22283-- Reading suppressions file: /usr/lib64/valgrind/default.supp
-==22283== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-22283-by-B220660-on-S221-FC20-B220660
-==22283== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-22283-by-B220660-on-S221-FC20-B220660
-==22283== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-22283-by-B220660-on-S221-FC20-B220660
-==22283== 
-==22283== TO CONTROL THIS PROCESS USING vgdb (which you probably
-==22283== don't want to do, unless you know exactly what you're doing,
-==22283== or are doing some strange experiment):
-==22283==   /usr/lib64/valgrind/../../bin/vgdb --pid=22283 ...command...
-==22283== 
-==22283== TO DEBUG THIS PROCESS USING GDB: start GDB like this
-==22283==   /path/to/gdb ./MyFactoryTest
-==22283== and then give GDB the following command
-==22283==   target remote | /usr/lib64/valgrind/../../bin/vgdb --pid=22283
-==22283== --pid is optional if only one valgrind process is running
-==22283== 
---22283-- REDIR: 0x38706183f0 (strlen) redirected to 0x380673f1 (???)
---22283-- Reading syms from /usr/lib64/valgrind/vgpreload_core-amd64-linux.so
---22283--    object doesn't have a symbol table
---22283-- Reading syms from /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so
---22283--    object doesn't have a symbol table
---22283-- REDIR: 0x3870618340 (index) redirected to 0x4a08f60 (index)
---22283-- REDIR: 0x38706183c0 (strcmp) redirected to 0x4a0a040 (strcmp)
---22283-- Reading syms from /home/B220660/study/architecture/myFactory/build/libMy_Message.so
---22283-- Reading syms from /usr/lib64/libpthread-2.18.so
---22283-- Reading syms from /usr/lib64/libc-2.18.so
---22283-- REDIR: 0x3870e898e0 (strcasecmp) redirected to 0x4801716 (_vgnU_ifunc_wrapper)
---22283-- REDIR: 0x3870e8bbd0 (strncasecmp) redirected to 0x4801716 (_vgnU_ifunc_wrapper)
---22283-- REDIR: 0x3870e890b0 (memcpy@GLIBC_2.2.5) redirected to 0x4801716 (_vgnU_ifunc_wrapper)
---22283-- REDIR: 0x3870e88090 (__GI_strrchr) redirected to 0x4a08d80 (__GI_strrchr)
---22283-- REDIR: 0x3870e86340 (strlen) redirected to 0x4a092f0 (strlen)
---22283-- REDIR: 0x3870e8fb90 (strchrnul) redirected to 0x4a0bd30 (strchrnul)
---22283-- REDIR: 0x3870e80670 (calloc) redirected to 0x4a0813e (calloc)
---22283-- REDIR: 0x3870e85d80 (strcpy) redirected to 0x4801716 (_vgnU_ifunc_wrapper)
---22283-- REDIR: 0x3870e98840 (__strcpy_sse2_unaligned) redirected to 0x4a09330 (strcpy)
-==22283== Invalid write of size 1
-==22283==    at 0x4A09363: strcpy (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
-==22283==    by 0x4C11393: SF_SetListName (LinkedList.c:88)
-==22283==    by 0x4C114F3: SF_InsertList (LinkedList.c:143)
-==22283==    by 0x4C12002: SF_PostMessage (MessageLib.c:281)
-==22283==    by 0x40088F: main (MessageLibTest.c:28)
-==22283==  Address 0x4e365a4 is 0 bytes after a block of size 4 alloc'd
-==22283==    at 0x4A081D4: calloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
-==22283==    by 0x4C11371: SF_SetListName (LinkedList.c:86)
-==22283==    by 0x4C114F3: SF_InsertList (LinkedList.c:143)
-==22283==    by 0x4C12002: SF_PostMessage (MessageLib.c:281)
-==22283==    by 0x40088F: main (MessageLibTest.c:28)
-==22283== 
---22283-- REDIR: 0x3870e8e2b0 (memcpy@@GLIBC_2.14) redirected to 0x4801716 (_vgnU_ifunc_wrapper)
---22283-- REDIR: 0x3870e93c80 (__memcpy_sse2_unaligned) redirected to 0x4a0a390 (memcpy@@GLIBC_2.14)
-==22283== Invalid write of size 8
-==22283==    at 0x4A0A555: memcpy@@GLIBC_2.14 (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
-==22283==    by 0x4C113F0: SF_SetListData (LinkedList.c:100)
-==22283==    by 0x4C1150C: SF_InsertList (LinkedList.c:145)
-==22283==    by 0x4C12002: SF_PostMessage (MessageLib.c:281)
-==22283==    by 0x40088F: main (MessageLibTest.c:28)
-==22283==  Address 0x4e365f8 is 4 bytes after a block of size 4 alloc'd
-==22283==    at 0x4A081D4: calloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
-==22283==    by 0x4C113CD: SF_SetListData (LinkedList.c:98)
-==22283==    by 0x4C1150C: SF_InsertList (LinkedList.c:145)
-==22283==    by 0x4C12002: SF_PostMessage (MessageLib.c:281)
-==22283==    by 0x40088F: main (MessageLibTest.c:28)
-==22283== 
---22283-- REDIR: 0x3870e800c0 (free) redirected to 0x4a074f0 (free)
-==22283== Invalid write of size 1
-==22283==    at 0x4A09363: strcpy (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
-==22283==    by 0x4C11393: SF_SetListName (LinkedList.c:88)
-==22283==    by 0x4C115A8: SF_InsertListFirst (LinkedList.c:166)
-==22283==    by 0x4C11E7A: SF_SendMessage (MessageLib.c:227)
-==22283==    by 0x4008E9: main (MessageLibTest.c:34)
-==22283==  Address 0x4e36a64 is 0 bytes after a block of size 4 alloc'd
-==22283==    at 0x4A081D4: calloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
-==22283==    by 0x4C11371: SF_SetListName (LinkedList.c:86)
-==22283==    by 0x4C115A8: SF_InsertListFirst (LinkedList.c:166)
-==22283==    by 0x4C11E7A: SF_SendMessage (MessageLib.c:227)
-==22283==    by 0x4008E9: main (MessageLibTest.c:34)
-==22283== 
-==22283== Invalid write of size 8
-==22283==    at 0x4A0A473: memcpy@@GLIBC_2.14 (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
-==22283==    by 0x4C113F0: SF_SetListData (LinkedList.c:100)
-==22283==    by 0x4C115C1: SF_InsertListFirst (LinkedList.c:168)
-==22283==    by 0x4C11E7A: SF_SendMessage (MessageLib.c:227)
-==22283==    by 0x4008E9: main (MessageLibTest.c:34)
-==22283==  Address 0x4e36ab0 is 0 bytes inside a block of size 4 alloc'd
-==22283==    at 0x4A081D4: calloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
-==22283==    by 0x4C113CD: SF_SetListData (LinkedList.c:98)
-==22283==    by 0x4C115C1: SF_InsertListFirst (LinkedList.c:168)
-==22283==    by 0x4C11E7A: SF_SendMessage (MessageLib.c:227)
-==22283==    by 0x4008E9: main (MessageLibTest.c:34)
-==22283== 
-==22283== Thread 2:
-==22283== Invalid read of size 1
-==22283==    at 0x3870E48C7B: vfprintf (in /usr/lib64/libc-2.18.so)
-==22283==    by 0x3870E51AE8: printf (in /usr/lib64/libc-2.18.so)
-==22283==    by 0x4C11BE6: SF_MessageThread (MessageLib.c:110)
-==22283==    by 0x3870A07EE4: start_thread (in /usr/lib64/libpthread-2.18.so)
-==22283==    by 0x3870EF4D1C: clone (in /usr/lib64/libc-2.18.so)
-==22283==  Address 0x4e36a64 is 0 bytes after a block of size 4 alloc'd
-==22283==    at 0x4A081D4: calloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
-==22283==    by 0x4C11371: SF_SetListName (LinkedList.c:86)
-==22283==    by 0x4C115A8: SF_InsertListFirst (LinkedList.c:166)
-==22283==    by 0x4C11E7A: SF_SendMessage (MessageLib.c:227)
-==22283==    by 0x4008E9: main (MessageLibTest.c:34)
-==22283== 
-==22283== Invalid read of size 1
-==22283==    at 0x4A09304: strlen (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
-==22283==    by 0x4C11BF2: SF_MessageThread (MessageLib.c:112)
-==22283==    by 0x3870A07EE4: start_thread (in /usr/lib64/libpthread-2.18.so)
-==22283==    by 0x3870EF4D1C: clone (in /usr/lib64/libc-2.18.so)
-==22283==  Address 0x4e36a64 is 0 bytes after a block of size 4 alloc'd
-==22283==    at 0x4A081D4: calloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
-==22283==    by 0x4C11371: SF_SetListName (LinkedList.c:86)
-==22283==    by 0x4C115A8: SF_InsertListFirst (LinkedList.c:166)
-==22283==    by 0x4C11E7A: SF_SendMessage (MessageLib.c:227)
-==22283==    by 0x4008E9: main (MessageLibTest.c:34)
-==22283== 
---22283-- REDIR: 0x3870e848e0 (strcmp) redirected to 0x4801716 (_vgnU_ifunc_wrapper)
---22283-- REDIR: 0x3870f3c170 (__strcmp_ssse3) redirected to 0x4a09fa0 (strcmp)
-==22283== Invalid read of size 1
-==22283==    at 0x4A09FB8: strcmp (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
-==22283==    by 0x4C11C71: SF_MessageThread (MessageLib.c:123)
-==22283==    by 0x3870A07EE4: start_thread (in /usr/lib64/libpthread-2.18.so)
-==22283==    by 0x3870EF4D1C: clone (in /usr/lib64/libc-2.18.so)
-==22283==  Address 0x4e36a64 is 0 bytes after a block of size 4 alloc'd
-==22283==    at 0x4A081D4: calloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
-==22283==    by 0x4C11371: SF_SetListName (LinkedList.c:86)
-==22283==    by 0x4C115A8: SF_InsertListFirst (LinkedList.c:166)
-==22283==    by 0x4C11E7A: SF_SendMessage (MessageLib.c:227)
-==22283==    by 0x4008E9: main (MessageLibTest.c:34)
-==22283== 
-==22283== Invalid read of size 8
-==22283==    at 0x4C11A8E: SF_ProcessSendMessage (MessageLib.c:64)
-==22283==    by 0x4C11C9D: SF_MessageThread (MessageLib.c:127)
-==22283==    by 0x3870A07EE4: start_thread (in /usr/lib64/libpthread-2.18.so)
-==22283==    by 0x3870EF4D1C: clone (in /usr/lib64/libc-2.18.so)
-==22283==  Address 0x4e36ab8 is 4 bytes after a block of size 4 alloc'd
-==22283==    at 0x4A081D4: calloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
-==22283==    by 0x4C113CD: SF_SetListData (LinkedList.c:98)
-==22283==    by 0x4C115C1: SF_InsertListFirst (LinkedList.c:168)
-==22283==    by 0x4C11E7A: SF_SendMessage (MessageLib.c:227)
-==22283==    by 0x4008E9: main (MessageLibTest.c:34)
-==22283== 
-==22283== Invalid read of size 8
-==22283==    at 0x4C11AA4: SF_ProcessSendMessage (MessageLib.c:70)
-==22283==    by 0x4C11C9D: SF_MessageThread (MessageLib.c:127)
-==22283==    by 0x3870A07EE4: start_thread (in /usr/lib64/libpthread-2.18.so)
-==22283==    by 0x3870EF4D1C: clone (in /usr/lib64/libc-2.18.so)
-==22283==  Address 0x4e36ab0 is 0 bytes inside a block of size 4 alloc'd
-==22283==    at 0x4A081D4: calloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
-==22283==    by 0x4C113CD: SF_SetListData (LinkedList.c:98)
-==22283==    by 0x4C115C1: SF_InsertListFirst (LinkedList.c:168)
-==22283==    by 0x4C11E7A: SF_SendMessage (MessageLib.c:227)
-==22283==    by 0x4008E9: main (MessageLibTest.c:34)
-==22283== 
-==22283== Invalid read of size 1
-==22283==    at 0x4A09FB8: strcmp (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
-==22283==    by 0x4C11C21: SF_MessageThread (MessageLib.c:114)
-==22283==    by 0x3870A07EE4: start_thread (in /usr/lib64/libpthread-2.18.so)
-==22283==    by 0x3870EF4D1C: clone (in /usr/lib64/libc-2.18.so)
-==22283==  Address 0x4e365a4 is 0 bytes after a block of size 4 alloc'd
-==22283==    at 0x4A081D4: calloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
-==22283==    by 0x4C11371: SF_SetListName (LinkedList.c:86)
-==22283==    by 0x4C114F3: SF_InsertList (LinkedList.c:143)
-==22283==    by 0x4C12002: SF_PostMessage (MessageLib.c:281)
-==22283==    by 0x40088F: main (MessageLibTest.c:28)
-==22283== 
-==22283== Invalid read of size 4
-==22283==    at 0x400826: fnMessageHandler (MessageLibTest.c:12)
-==22283==    by 0x4C11A2C: SF_ProcessPostMessage (MessageLib.c:41)
-==22283==    by 0x4C11C4D: SF_MessageThread (MessageLib.c:118)
-==22283==    by 0x3870A07EE4: start_thread (in /usr/lib64/libpthread-2.18.so)
-==22283==    by 0x3870EF4D1C: clone (in /usr/lib64/libc-2.18.so)
-==22283==  Address 0x4e365f8 is 4 bytes after a block of size 4 alloc'd
-==22283==    at 0x4A081D4: calloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
-==22283==    by 0x4C113CD: SF_SetListData (LinkedList.c:98)
-==22283==    by 0x4C1150C: SF_InsertList (LinkedList.c:145)
-==22283==    by 0x4C12002: SF_PostMessage (MessageLib.c:281)
-==22283==    by 0x40088F: main (MessageLibTest.c:28)
-==22283== 
-==22283== 
-==22283== Process terminating with default action of signal 2 (SIGINT)
-==22283==    at 0x3870A09237: pthread_join (in /usr/lib64/libpthread-2.18.so)
-==22283==    by 0x4C11D9D: SF_DestroyMessageThread (MessageLib.c:183)
-==22283==    by 0x4C121E6: DestroyMessage (MessageLib.c:374)
-==22283==    by 0x40090E: main (MessageLibTest.c:40)
-==22283== 
-==22283== HEAP SUMMARY:
-==22283==     in use at exit: 680 bytes in 17 blocks
-==22283==   total heap usage: 25 allocs, 8 frees, 984 bytes allocated
-==22283== 
-==22283== Searching for pointers to 17 not-freed blocks
-==22283== Checked 8,488,800 bytes
-==22283== 
-==22283== Thread 1:
-==22283== 4 bytes in 1 blocks are definitely lost in loss record 4 of 17
-==22283==    at 0x4A081D4: calloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
-==22283==    by 0x4C11371: SF_SetListName (LinkedList.c:86)
-==22283==    by 0x4C114F3: SF_InsertList (LinkedList.c:143)
-==22283==    by 0x4C12002: SF_PostMessage (MessageLib.c:281)
-==22283==    by 0x40088F: main (MessageLibTest.c:28)
-==22283== 
-==22283== 4 bytes in 1 blocks are definitely lost in loss record 5 of 17
-==22283==    at 0x4A081D4: calloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
-==22283==    by 0x4C113CD: SF_SetListData (LinkedList.c:98)
-==22283==    by 0x4C1150C: SF_InsertList (LinkedList.c:145)
-==22283==    by 0x4C12002: SF_PostMessage (MessageLib.c:281)
-==22283==    by 0x40088F: main (MessageLibTest.c:28)
-==22283== 
-==22283== 4 bytes in 1 blocks are definitely lost in loss record 6 of 17
-==22283==    at 0x4A081D4: calloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
-==22283==    by 0x4C11371: SF_SetListName (LinkedList.c:86)
-==22283==    by 0x4C114F3: SF_InsertList (LinkedList.c:143)
-==22283==    by 0x4C12002: SF_PostMessage (MessageLib.c:281)
-==22283==    by 0x4008AD: main (MessageLibTest.c:30)
-==22283== 
-==22283== 4 bytes in 1 blocks are definitely lost in loss record 7 of 17
-==22283==    at 0x4A081D4: calloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
-==22283==    by 0x4C113CD: SF_SetListData (LinkedList.c:98)
-==22283==    by 0x4C1150C: SF_InsertList (LinkedList.c:145)
-==22283==    by 0x4C12002: SF_PostMessage (MessageLib.c:281)
-==22283==    by 0x4008AD: main (MessageLibTest.c:30)
-==22283== 
-==22283== 4 bytes in 1 blocks are definitely lost in loss record 8 of 17
-==22283==    at 0x4A081D4: calloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
-==22283==    by 0x4C11371: SF_SetListName (LinkedList.c:86)
-==22283==    by 0x4C115A8: SF_InsertListFirst (LinkedList.c:166)
-==22283==    by 0x4C11E7A: SF_SendMessage (MessageLib.c:227)
-==22283==    by 0x4008E9: main (MessageLibTest.c:34)
-==22283== 
-==22283== 16 bytes in 1 blocks are definitely lost in loss record 10 of 17
-==22283==    at 0x4A081D4: calloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
-==22283==    by 0x4C11E18: SF_SendMessage (MessageLib.c:214)
-==22283==    by 0x4008E9: main (MessageLibTest.c:34)
-==22283== 
-==22283== 272 bytes in 1 blocks are possibly lost in loss record 17 of 17
-==22283==    at 0x4A081D4: calloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
-==22283==    by 0x3870611C24: _dl_allocate_tls (in /usr/lib64/ld-2.18.so)
-==22283==    by 0x3870A0880A: pthread_create@@GLIBC_2.2.5 (in /usr/lib64/libpthread-2.18.so)
-==22283==    by 0x4C11D2D: SF_CreateMessageThread (MessageLib.c:155)
-==22283==    by 0x4C12157: CreateMessage (MessageLib.c:338)
-==22283==    by 0x40086D: main (MessageLibTest.c:26)
-==22283== 
-==22283== LEAK SUMMARY:
-==22283==    definitely lost: 36 bytes in 6 blocks
-==22283==    indirectly lost: 0 bytes in 0 blocks
-==22283==      possibly lost: 272 bytes in 1 blocks
-==22283==    still reachable: 372 bytes in 10 blocks
-==22283==         suppressed: 0 bytes in 0 blocks
-==22283== Reachable blocks (those to which a pointer was found) are not shown.
-==22283== To see them, rerun with: --leak-check=full --show-leak-kinds=all
-==22283== 
-==22283== ERROR SUMMARY: 36 errors from 18 contexts (suppressed: 2 from 2)
-==22283== 
-==22283== 1 errors in context 1 of 18:
-==22283== Thread 2:
-==22283== Invalid read of size 8
-==22283==    at 0x4C11AA4: SF_ProcessSendMessage (MessageLib.c:70)
-==22283==    by 0x4C11C9D: SF_MessageThread (MessageLib.c:127)
-==22283==    by 0x3870A07EE4: start_thread (in /usr/lib64/libpthread-2.18.so)
-==22283==    by 0x3870EF4D1C: clone (in /usr/lib64/libc-2.18.so)
-==22283==  Address 0x4e36ab0 is 0 bytes inside a block of size 4 alloc'd
-==22283==    at 0x4A081D4: calloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
-==22283==    by 0x4C113CD: SF_SetListData (LinkedList.c:98)
-==22283==    by 0x4C115C1: SF_InsertListFirst (LinkedList.c:168)
-==22283==    by 0x4C11E7A: SF_SendMessage (MessageLib.c:227)
-==22283==    by 0x4008E9: main (MessageLibTest.c:34)
-==22283== 
-==22283== 
-==22283== 1 errors in context 2 of 18:
-==22283== Invalid read of size 8
-==22283==    at 0x4C11A8E: SF_ProcessSendMessage (MessageLib.c:64)
-==22283==    by 0x4C11C9D: SF_MessageThread (MessageLib.c:127)
-==22283==    by 0x3870A07EE4: start_thread (in /usr/lib64/libpthread-2.18.so)
-==22283==    by 0x3870EF4D1C: clone (in /usr/lib64/libc-2.18.so)
-==22283==  Address 0x4e36ab8 is 4 bytes after a block of size 4 alloc'd
-==22283==    at 0x4A081D4: calloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
-==22283==    by 0x4C113CD: SF_SetListData (LinkedList.c:98)
-==22283==    by 0x4C115C1: SF_InsertListFirst (LinkedList.c:168)
-==22283==    by 0x4C11E7A: SF_SendMessage (MessageLib.c:227)
-==22283==    by 0x4008E9: main (MessageLibTest.c:34)
-==22283== 
-==22283== 
-==22283== 1 errors in context 3 of 18:
-==22283== Invalid read of size 1
-==22283==    at 0x4A09FB8: strcmp (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
-==22283==    by 0x4C11C71: SF_MessageThread (MessageLib.c:123)
-==22283==    by 0x3870A07EE4: start_thread (in /usr/lib64/libpthread-2.18.so)
-==22283==    by 0x3870EF4D1C: clone (in /usr/lib64/libc-2.18.so)
-==22283==  Address 0x4e36a64 is 0 bytes after a block of size 4 alloc'd
-==22283==    at 0x4A081D4: calloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
-==22283==    by 0x4C11371: SF_SetListName (LinkedList.c:86)
-==22283==    by 0x4C115A8: SF_InsertListFirst (LinkedList.c:166)
-==22283==    by 0x4C11E7A: SF_SendMessage (MessageLib.c:227)
-==22283==    by 0x4008E9: main (MessageLibTest.c:34)
-==22283== 
-==22283== 
-==22283== 1 errors in context 4 of 18:
-==22283== Thread 1:
-==22283== Invalid write of size 1
-==22283==    at 0x4A09363: strcpy (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
-==22283==    by 0x4C11393: SF_SetListName (LinkedList.c:88)
-==22283==    by 0x4C115A8: SF_InsertListFirst (LinkedList.c:166)
-==22283==    by 0x4C11E7A: SF_SendMessage (MessageLib.c:227)
-==22283==    by 0x4008E9: main (MessageLibTest.c:34)
-==22283==  Address 0x4e36a64 is 0 bytes after a block of size 4 alloc'd
-==22283==    at 0x4A081D4: calloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
-==22283==    by 0x4C11371: SF_SetListName (LinkedList.c:86)
-==22283==    by 0x4C115A8: SF_InsertListFirst (LinkedList.c:166)
-==22283==    by 0x4C11E7A: SF_SendMessage (MessageLib.c:227)
-==22283==    by 0x4008E9: main (MessageLibTest.c:34)
-==22283== 
-==22283== 
-==22283== 2 errors in context 5 of 18:
-==22283== Invalid write of size 8
-==22283==    at 0x4A0A473: memcpy@@GLIBC_2.14 (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
-==22283==    by 0x4C113F0: SF_SetListData (LinkedList.c:100)
-==22283==    by 0x4C115C1: SF_InsertListFirst (LinkedList.c:168)
-==22283==    by 0x4C11E7A: SF_SendMessage (MessageLib.c:227)
-==22283==    by 0x4008E9: main (MessageLibTest.c:34)
-==22283==  Address 0x4e36ab0 is 0 bytes inside a block of size 4 alloc'd
-==22283==    at 0x4A081D4: calloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
-==22283==    by 0x4C113CD: SF_SetListData (LinkedList.c:98)
-==22283==    by 0x4C115C1: SF_InsertListFirst (LinkedList.c:168)
-==22283==    by 0x4C11E7A: SF_SendMessage (MessageLib.c:227)
-==22283==    by 0x4008E9: main (MessageLibTest.c:34)
-==22283== 
-==22283== 
-==22283== 3 errors in context 6 of 18:
-==22283== Thread 2:
-==22283== Invalid read of size 4
-==22283==    at 0x400826: fnMessageHandler (MessageLibTest.c:12)
-==22283==    by 0x4C11A2C: SF_ProcessPostMessage (MessageLib.c:41)
-==22283==    by 0x4C11C4D: SF_MessageThread (MessageLib.c:118)
-==22283==    by 0x3870A07EE4: start_thread (in /usr/lib64/libpthread-2.18.so)
-==22283==    by 0x3870EF4D1C: clone (in /usr/lib64/libc-2.18.so)
-==22283==  Address 0x4e365f8 is 4 bytes after a block of size 4 alloc'd
-==22283==    at 0x4A081D4: calloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
-==22283==    by 0x4C113CD: SF_SetListData (LinkedList.c:98)
-==22283==    by 0x4C1150C: SF_InsertList (LinkedList.c:145)
-==22283==    by 0x4C12002: SF_PostMessage (MessageLib.c:281)
-==22283==    by 0x40088F: main (MessageLibTest.c:28)
-==22283== 
-==22283== 
-==22283== 3 errors in context 7 of 18:
-==22283== Invalid read of size 1
-==22283==    at 0x4A09FB8: strcmp (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
-==22283==    by 0x4C11C21: SF_MessageThread (MessageLib.c:114)
-==22283==    by 0x3870A07EE4: start_thread (in /usr/lib64/libpthread-2.18.so)
-==22283==    by 0x3870EF4D1C: clone (in /usr/lib64/libc-2.18.so)
-==22283==  Address 0x4e365a4 is 0 bytes after a block of size 4 alloc'd
-==22283==    at 0x4A081D4: calloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
-==22283==    by 0x4C11371: SF_SetListName (LinkedList.c:86)
-==22283==    by 0x4C114F3: SF_InsertList (LinkedList.c:143)
-==22283==    by 0x4C12002: SF_PostMessage (MessageLib.c:281)
-==22283==    by 0x40088F: main (MessageLibTest.c:28)
-==22283== 
-==22283== 
-==22283== 3 errors in context 8 of 18:
-==22283== Thread 1:
-==22283== Invalid write of size 1
-==22283==    at 0x4A09363: strcpy (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
-==22283==    by 0x4C11393: SF_SetListName (LinkedList.c:88)
-==22283==    by 0x4C114F3: SF_InsertList (LinkedList.c:143)
-==22283==    by 0x4C12002: SF_PostMessage (MessageLib.c:281)
-==22283==    by 0x40088F: main (MessageLibTest.c:28)
-==22283==  Address 0x4e365a4 is 0 bytes after a block of size 4 alloc'd
-==22283==    at 0x4A081D4: calloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
-==22283==    by 0x4C11371: SF_SetListName (LinkedList.c:86)
-==22283==    by 0x4C114F3: SF_InsertList (LinkedList.c:143)
-==22283==    by 0x4C12002: SF_PostMessage (MessageLib.c:281)
-==22283==    by 0x40088F: main (MessageLibTest.c:28)
-==22283== 
-==22283== 
-==22283== 4 errors in context 9 of 18:
-==22283== Thread 2:
-==22283== Invalid read of size 1
-==22283==    at 0x4A09304: strlen (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
-==22283==    by 0x4C11BF2: SF_MessageThread (MessageLib.c:112)
-==22283==    by 0x3870A07EE4: start_thread (in /usr/lib64/libpthread-2.18.so)
-==22283==    by 0x3870EF4D1C: clone (in /usr/lib64/libc-2.18.so)
-==22283==  Address 0x4e36a64 is 0 bytes after a block of size 4 alloc'd
-==22283==    at 0x4A081D4: calloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
-==22283==    by 0x4C11371: SF_SetListName (LinkedList.c:86)
-==22283==    by 0x4C115A8: SF_InsertListFirst (LinkedList.c:166)
-==22283==    by 0x4C11E7A: SF_SendMessage (MessageLib.c:227)
-==22283==    by 0x4008E9: main (MessageLibTest.c:34)
-==22283== 
-==22283== 
-==22283== 4 errors in context 10 of 18:
-==22283== Invalid read of size 1
-==22283==    at 0x3870E48C7B: vfprintf (in /usr/lib64/libc-2.18.so)
-==22283==    by 0x3870E51AE8: printf (in /usr/lib64/libc-2.18.so)
-==22283==    by 0x4C11BE6: SF_MessageThread (MessageLib.c:110)
-==22283==    by 0x3870A07EE4: start_thread (in /usr/lib64/libpthread-2.18.so)
-==22283==    by 0x3870EF4D1C: clone (in /usr/lib64/libc-2.18.so)
-==22283==  Address 0x4e36a64 is 0 bytes after a block of size 4 alloc'd
-==22283==    at 0x4A081D4: calloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
-==22283==    by 0x4C11371: SF_SetListName (LinkedList.c:86)
-==22283==    by 0x4C115A8: SF_InsertListFirst (LinkedList.c:166)
-==22283==    by 0x4C11E7A: SF_SendMessage (MessageLib.c:227)
-==22283==    by 0x4008E9: main (MessageLibTest.c:34)
-==22283== 
-==22283== 
-==22283== 6 errors in context 11 of 18:
-==22283== Thread 1:
-==22283== Invalid write of size 8
-==22283==    at 0x4A0A555: memcpy@@GLIBC_2.14 (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
-==22283==    by 0x4C113F0: SF_SetListData (LinkedList.c:100)
-==22283==    by 0x4C1150C: SF_InsertList (LinkedList.c:145)
-==22283==    by 0x4C12002: SF_PostMessage (MessageLib.c:281)
-==22283==    by 0x40088F: main (MessageLibTest.c:28)
-==22283==  Address 0x4e365f8 is 4 bytes after a block of size 4 alloc'd
-==22283==    at 0x4A081D4: calloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
-==22283==    by 0x4C113CD: SF_SetListData (LinkedList.c:98)
-==22283==    by 0x4C1150C: SF_InsertList (LinkedList.c:145)
-==22283==    by 0x4C12002: SF_PostMessage (MessageLib.c:281)
-==22283==    by 0x40088F: main (MessageLibTest.c:28)
-==22283== 
---22283-- 
---22283-- used_suppression:      2 glibc-2.5.x-on-SUSE-10.2-(PPC)-2a /usr/lib64/valgrind/default.supp:1286
-==22283== 
-==22283== ERROR SUMMARY: 36 errors from 18 contexts (suppressed: 2 from 2)
+==31574== Memcheck, a memory error detector
+==31574== Copyright (C) 2002-2013, and GNU GPL'd, by Julian Seward et al.
+==31574== Using Valgrind-3.9.0 and LibVEX; rerun with -h for copyright info
+==31574== Command: ./MyFactoryTest
+==31574== Parent PID: 19554
+==31574== 
+--31574-- 
+--31574-- Valgrind options:
+--31574--    --leak-check=full
+--31574--    --log-file=memcheck.txt
+--31574--    -v
+--31574--    --error-limit=no
+--31574-- Contents of /proc/version:
+--31574--   Linux version 3.19.8-100.fc20.x86_64 (mockbuild@bkernel01.phx2.fedoraproject.org) (gcc version 4.8.3 20140911 (Red Hat 4.8.3-7) (GCC) ) #1 SMP Tue May 12 17:08:50 UTC 2015
+--31574-- Arch and hwcaps: AMD64, amd64-cx16-lzcnt-rdtscp-sse3-avx-avx2-bmi
+--31574-- Page sizes: currently 4096, max supported 4096
+--31574-- Valgrind library directory: /usr/lib64/valgrind
+--31574-- Reading syms from /home/B220660/study/architecture/myFactory/build/MyFactoryTest
+--31574-- Reading syms from /usr/lib64/valgrind/memcheck-amd64-linux
+--31574--    object doesn't have a symbol table
+--31574--    object doesn't have a dynamic symbol table
+--31574-- Reading syms from /usr/lib64/ld-2.18.so
+--31574-- Scheduler: using generic scheduler lock implementation.
+--31574-- Reading suppressions file: /usr/lib64/valgrind/default.supp
+==31574== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-31574-by-B220660-on-S221-FC20-B220660
+==31574== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-31574-by-B220660-on-S221-FC20-B220660
+==31574== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-31574-by-B220660-on-S221-FC20-B220660
+==31574== 
+==31574== TO CONTROL THIS PROCESS USING vgdb (which you probably
+==31574== don't want to do, unless you know exactly what you're doing,
+==31574== or are doing some strange experiment):
+==31574==   /usr/lib64/valgrind/../../bin/vgdb --pid=31574 ...command...
+==31574== 
+==31574== TO DEBUG THIS PROCESS USING GDB: start GDB like this
+==31574==   /path/to/gdb ./MyFactoryTest
+==31574== and then give GDB the following command
+==31574==   target remote | /usr/lib64/valgrind/../../bin/vgdb --pid=31574
+==31574== --pid is optional if only one valgrind process is running
+==31574== 
+--31574-- REDIR: 0x38706183f0 (strlen) redirected to 0x380673f1 (???)
+--31574-- Reading syms from /usr/lib64/valgrind/vgpreload_core-amd64-linux.so
+--31574--    object doesn't have a symbol table
+--31574-- Reading syms from /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so
+--31574--    object doesn't have a symbol table
+--31574-- REDIR: 0x3870618340 (index) redirected to 0x4a08f60 (index)
+--31574-- REDIR: 0x38706183c0 (strcmp) redirected to 0x4a0a040 (strcmp)
+--31574-- Reading syms from /home/B220660/study/architecture/myFactory/build/libMy_Message.so
+--31574-- Reading syms from /usr/lib64/libpthread-2.18.so
+--31574-- Reading syms from /usr/lib64/libc-2.18.so
+--31574-- REDIR: 0x3870e898e0 (strcasecmp) redirected to 0x4801716 (_vgnU_ifunc_wrapper)
+--31574-- REDIR: 0x3870e8bbd0 (strncasecmp) redirected to 0x4801716 (_vgnU_ifunc_wrapper)
+--31574-- REDIR: 0x3870e890b0 (memcpy@GLIBC_2.2.5) redirected to 0x4801716 (_vgnU_ifunc_wrapper)
+--31574-- REDIR: 0x3870e88090 (__GI_strrchr) redirected to 0x4a08d80 (__GI_strrchr)
+--31574-- REDIR: 0x3870e86340 (strlen) redirected to 0x4a092f0 (strlen)
+--31574-- REDIR: 0x3870e8fb90 (strchrnul) redirected to 0x4a0bd30 (strchrnul)
+--31574-- REDIR: 0x3870e80670 (calloc) redirected to 0x4a0813e (calloc)
+--31574-- REDIR: 0x3870e85d80 (strcpy) redirected to 0x4801716 (_vgnU_ifunc_wrapper)
+--31574-- REDIR: 0x3870e98840 (__strcpy_sse2_unaligned) redirected to 0x4a09330 (strcpy)
+==31574== Invalid write of size 1
+==31574==    at 0x4A09363: strcpy (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31574==    by 0x4C11393: SF_SetListName (LinkedList.c:88)
+==31574==    by 0x4C114F3: SF_InsertList (LinkedList.c:143)
+==31574==    by 0x4C12002: SF_PostMessage (MessageLib.c:281)
+==31574==    by 0x40088F: main (MessageLibTest.c:28)
+==31574==  Address 0x4e365a4 is 0 bytes after a block of size 4 alloc'd
+==31574==    at 0x4A081D4: calloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31574==    by 0x4C11371: SF_SetListName (LinkedList.c:86)
+==31574==    by 0x4C114F3: SF_InsertList (LinkedList.c:143)
+==31574==    by 0x4C12002: SF_PostMessage (MessageLib.c:281)
+==31574==    by 0x40088F: main (MessageLibTest.c:28)
+==31574== 
+--31574-- REDIR: 0x3870e8e2b0 (memcpy@@GLIBC_2.14) redirected to 0x4801716 (_vgnU_ifunc_wrapper)
+--31574-- REDIR: 0x3870e93c80 (__memcpy_sse2_unaligned) redirected to 0x4a0a390 (memcpy@@GLIBC_2.14)
+==31574== Invalid write of size 8
+==31574==    at 0x4A0A555: memcpy@@GLIBC_2.14 (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31574==    by 0x4C113F0: SF_SetListData (LinkedList.c:100)
+==31574==    by 0x4C1150C: SF_InsertList (LinkedList.c:145)
+==31574==    by 0x4C12002: SF_PostMessage (MessageLib.c:281)
+==31574==    by 0x40088F: main (MessageLibTest.c:28)
+==31574==  Address 0x4e365f8 is 4 bytes after a block of size 4 alloc'd
+==31574==    at 0x4A081D4: calloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31574==    by 0x4C113CD: SF_SetListData (LinkedList.c:98)
+==31574==    by 0x4C1150C: SF_InsertList (LinkedList.c:145)
+==31574==    by 0x4C12002: SF_PostMessage (MessageLib.c:281)
+==31574==    by 0x40088F: main (MessageLibTest.c:28)
+==31574== 
+--31574-- REDIR: 0x3870e800c0 (free) redirected to 0x4a074f0 (free)
+==31574== Invalid write of size 1
+==31574==    at 0x4A09363: strcpy (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31574==    by 0x4C11393: SF_SetListName (LinkedList.c:88)
+==31574==    by 0x4C115A8: SF_InsertListFirst (LinkedList.c:166)
+==31574==    by 0x4C11E7A: SF_SendMessage (MessageLib.c:227)
+==31574==    by 0x4008E9: main (MessageLibTest.c:34)
+==31574==  Address 0x4e36a64 is 0 bytes after a block of size 4 alloc'd
+==31574==    at 0x4A081D4: calloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31574==    by 0x4C11371: SF_SetListName (LinkedList.c:86)
+==31574==    by 0x4C115A8: SF_InsertListFirst (LinkedList.c:166)
+==31574==    by 0x4C11E7A: SF_SendMessage (MessageLib.c:227)
+==31574==    by 0x4008E9: main (MessageLibTest.c:34)
+==31574== 
+==31574== Invalid write of size 8
+==31574==    at 0x4A0A473: memcpy@@GLIBC_2.14 (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31574==    by 0x4C113F0: SF_SetListData (LinkedList.c:100)
+==31574==    by 0x4C115C1: SF_InsertListFirst (LinkedList.c:168)
+==31574==    by 0x4C11E7A: SF_SendMessage (MessageLib.c:227)
+==31574==    by 0x4008E9: main (MessageLibTest.c:34)
+==31574==  Address 0x4e36ab0 is 0 bytes inside a block of size 4 alloc'd
+==31574==    at 0x4A081D4: calloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31574==    by 0x4C113CD: SF_SetListData (LinkedList.c:98)
+==31574==    by 0x4C115C1: SF_InsertListFirst (LinkedList.c:168)
+==31574==    by 0x4C11E7A: SF_SendMessage (MessageLib.c:227)
+==31574==    by 0x4008E9: main (MessageLibTest.c:34)
+==31574== 
+==31574== Thread 2:
+==31574== Invalid read of size 1
+==31574==    at 0x3870E48C7B: vfprintf (in /usr/lib64/libc-2.18.so)
+==31574==    by 0x3870E51AE8: printf (in /usr/lib64/libc-2.18.so)
+==31574==    by 0x4C11BE6: SF_MessageThread (MessageLib.c:110)
+==31574==    by 0x3870A07EE4: start_thread (in /usr/lib64/libpthread-2.18.so)
+==31574==    by 0x3870EF4D1C: clone (in /usr/lib64/libc-2.18.so)
+==31574==  Address 0x4e36a64 is 0 bytes after a block of size 4 alloc'd
+==31574==    at 0x4A081D4: calloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31574==    by 0x4C11371: SF_SetListName (LinkedList.c:86)
+==31574==    by 0x4C115A8: SF_InsertListFirst (LinkedList.c:166)
+==31574==    by 0x4C11E7A: SF_SendMessage (MessageLib.c:227)
+==31574==    by 0x4008E9: main (MessageLibTest.c:34)
+==31574== 
+==31574== Invalid read of size 1
+==31574==    at 0x4A09304: strlen (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31574==    by 0x4C11BF2: SF_MessageThread (MessageLib.c:112)
+==31574==    by 0x3870A07EE4: start_thread (in /usr/lib64/libpthread-2.18.so)
+==31574==    by 0x3870EF4D1C: clone (in /usr/lib64/libc-2.18.so)
+==31574==  Address 0x4e36a64 is 0 bytes after a block of size 4 alloc'd
+==31574==    at 0x4A081D4: calloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31574==    by 0x4C11371: SF_SetListName (LinkedList.c:86)
+==31574==    by 0x4C115A8: SF_InsertListFirst (LinkedList.c:166)
+==31574==    by 0x4C11E7A: SF_SendMessage (MessageLib.c:227)
+==31574==    by 0x4008E9: main (MessageLibTest.c:34)
+==31574== 
+--31574-- REDIR: 0x3870e848e0 (strcmp) redirected to 0x4801716 (_vgnU_ifunc_wrapper)
+--31574-- REDIR: 0x3870f3c170 (__strcmp_ssse3) redirected to 0x4a09fa0 (strcmp)
+==31574== Invalid read of size 1
+==31574==    at 0x4A09FB8: strcmp (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31574==    by 0x4C11C71: SF_MessageThread (MessageLib.c:123)
+==31574==    by 0x3870A07EE4: start_thread (in /usr/lib64/libpthread-2.18.so)
+==31574==    by 0x3870EF4D1C: clone (in /usr/lib64/libc-2.18.so)
+==31574==  Address 0x4e36a64 is 0 bytes after a block of size 4 alloc'd
+==31574==    at 0x4A081D4: calloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31574==    by 0x4C11371: SF_SetListName (LinkedList.c:86)
+==31574==    by 0x4C115A8: SF_InsertListFirst (LinkedList.c:166)
+==31574==    by 0x4C11E7A: SF_SendMessage (MessageLib.c:227)
+==31574==    by 0x4008E9: main (MessageLibTest.c:34)
+==31574== 
+==31574== Invalid read of size 8
+==31574==    at 0x4C11A8E: SF_ProcessSendMessage (MessageLib.c:64)
+==31574==    by 0x4C11C9D: SF_MessageThread (MessageLib.c:127)
+==31574==    by 0x3870A07EE4: start_thread (in /usr/lib64/libpthread-2.18.so)
+==31574==    by 0x3870EF4D1C: clone (in /usr/lib64/libc-2.18.so)
+==31574==  Address 0x4e36ab8 is 4 bytes after a block of size 4 alloc'd
+==31574==    at 0x4A081D4: calloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31574==    by 0x4C113CD: SF_SetListData (LinkedList.c:98)
+==31574==    by 0x4C115C1: SF_InsertListFirst (LinkedList.c:168)
+==31574==    by 0x4C11E7A: SF_SendMessage (MessageLib.c:227)
+==31574==    by 0x4008E9: main (MessageLibTest.c:34)
+==31574== 
+==31574== Invalid read of size 8
+==31574==    at 0x4C11AA4: SF_ProcessSendMessage (MessageLib.c:70)
+==31574==    by 0x4C11C9D: SF_MessageThread (MessageLib.c:127)
+==31574==    by 0x3870A07EE4: start_thread (in /usr/lib64/libpthread-2.18.so)
+==31574==    by 0x3870EF4D1C: clone (in /usr/lib64/libc-2.18.so)
+==31574==  Address 0x4e36ab0 is 0 bytes inside a block of size 4 alloc'd
+==31574==    at 0x4A081D4: calloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31574==    by 0x4C113CD: SF_SetListData (LinkedList.c:98)
+==31574==    by 0x4C115C1: SF_InsertListFirst (LinkedList.c:168)
+==31574==    by 0x4C11E7A: SF_SendMessage (MessageLib.c:227)
+==31574==    by 0x4008E9: main (MessageLibTest.c:34)
+==31574== 
+==31574== Invalid read of size 1
+==31574==    at 0x4A09FB8: strcmp (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31574==    by 0x4C11C21: SF_MessageThread (MessageLib.c:114)
+==31574==    by 0x3870A07EE4: start_thread (in /usr/lib64/libpthread-2.18.so)
+==31574==    by 0x3870EF4D1C: clone (in /usr/lib64/libc-2.18.so)
+==31574==  Address 0x4e365a4 is 0 bytes after a block of size 4 alloc'd
+==31574==    at 0x4A081D4: calloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31574==    by 0x4C11371: SF_SetListName (LinkedList.c:86)
+==31574==    by 0x4C114F3: SF_InsertList (LinkedList.c:143)
+==31574==    by 0x4C12002: SF_PostMessage (MessageLib.c:281)
+==31574==    by 0x40088F: main (MessageLibTest.c:28)
+==31574== 
+==31574== Invalid read of size 4
+==31574==    at 0x400826: fnMessageHandler (MessageLibTest.c:12)
+==31574==    by 0x4C11A2C: SF_ProcessPostMessage (MessageLib.c:41)
+==31574==    by 0x4C11C4D: SF_MessageThread (MessageLib.c:118)
+==31574==    by 0x3870A07EE4: start_thread (in /usr/lib64/libpthread-2.18.so)
+==31574==    by 0x3870EF4D1C: clone (in /usr/lib64/libc-2.18.so)
+==31574==  Address 0x4e365f8 is 4 bytes after a block of size 4 alloc'd
+==31574==    at 0x4A081D4: calloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31574==    by 0x4C113CD: SF_SetListData (LinkedList.c:98)
+==31574==    by 0x4C1150C: SF_InsertList (LinkedList.c:145)
+==31574==    by 0x4C12002: SF_PostMessage (MessageLib.c:281)
+==31574==    by 0x40088F: main (MessageLibTest.c:28)
+==31574== 
+==31574== 
+==31574== Process terminating with default action of signal 2 (SIGINT)
+==31574==    at 0x3870A09237: pthread_join (in /usr/lib64/libpthread-2.18.so)
+==31574==    by 0x4C11D9D: SF_DestroyMessageThread (MessageLib.c:183)
+==31574==    by 0x4C121E6: DestroyMessage (MessageLib.c:374)
+==31574==    by 0x40090E: main (MessageLibTest.c:40)
+==31574== 
+==31574== HEAP SUMMARY:
+==31574==     in use at exit: 680 bytes in 17 blocks
+==31574==   total heap usage: 25 allocs, 8 frees, 984 bytes allocated
+==31574== 
+==31574== Searching for pointers to 17 not-freed blocks
+==31574== Checked 8,488,800 bytes
+==31574== 
+==31574== Thread 1:
+==31574== 4 bytes in 1 blocks are definitely lost in loss record 4 of 17
+==31574==    at 0x4A081D4: calloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31574==    by 0x4C11371: SF_SetListName (LinkedList.c:86)
+==31574==    by 0x4C114F3: SF_InsertList (LinkedList.c:143)
+==31574==    by 0x4C12002: SF_PostMessage (MessageLib.c:281)
+==31574==    by 0x40088F: main (MessageLibTest.c:28)
+==31574== 
+==31574== 4 bytes in 1 blocks are definitely lost in loss record 5 of 17
+==31574==    at 0x4A081D4: calloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31574==    by 0x4C113CD: SF_SetListData (LinkedList.c:98)
+==31574==    by 0x4C1150C: SF_InsertList (LinkedList.c:145)
+==31574==    by 0x4C12002: SF_PostMessage (MessageLib.c:281)
+==31574==    by 0x40088F: main (MessageLibTest.c:28)
+==31574== 
+==31574== 4 bytes in 1 blocks are definitely lost in loss record 6 of 17
+==31574==    at 0x4A081D4: calloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31574==    by 0x4C11371: SF_SetListName (LinkedList.c:86)
+==31574==    by 0x4C114F3: SF_InsertList (LinkedList.c:143)
+==31574==    by 0x4C12002: SF_PostMessage (MessageLib.c:281)
+==31574==    by 0x4008AD: main (MessageLibTest.c:30)
+==31574== 
+==31574== 4 bytes in 1 blocks are definitely lost in loss record 7 of 17
+==31574==    at 0x4A081D4: calloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31574==    by 0x4C113CD: SF_SetListData (LinkedList.c:98)
+==31574==    by 0x4C1150C: SF_InsertList (LinkedList.c:145)
+==31574==    by 0x4C12002: SF_PostMessage (MessageLib.c:281)
+==31574==    by 0x4008AD: main (MessageLibTest.c:30)
+==31574== 
+==31574== 4 bytes in 1 blocks are definitely lost in loss record 8 of 17
+==31574==    at 0x4A081D4: calloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31574==    by 0x4C11371: SF_SetListName (LinkedList.c:86)
+==31574==    by 0x4C115A8: SF_InsertListFirst (LinkedList.c:166)
+==31574==    by 0x4C11E7A: SF_SendMessage (MessageLib.c:227)
+==31574==    by 0x4008E9: main (MessageLibTest.c:34)
+==31574== 
+==31574== 16 bytes in 1 blocks are definitely lost in loss record 10 of 17
+==31574==    at 0x4A081D4: calloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31574==    by 0x4C11E18: SF_SendMessage (MessageLib.c:214)
+==31574==    by 0x4008E9: main (MessageLibTest.c:34)
+==31574== 
+==31574== 272 bytes in 1 blocks are possibly lost in loss record 17 of 17
+==31574==    at 0x4A081D4: calloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31574==    by 0x3870611C24: _dl_allocate_tls (in /usr/lib64/ld-2.18.so)
+==31574==    by 0x3870A0880A: pthread_create@@GLIBC_2.2.5 (in /usr/lib64/libpthread-2.18.so)
+==31574==    by 0x4C11D2D: SF_CreateMessageThread (MessageLib.c:155)
+==31574==    by 0x4C12157: CreateMessage (MessageLib.c:338)
+==31574==    by 0x40086D: main (MessageLibTest.c:26)
+==31574== 
+==31574== LEAK SUMMARY:
+==31574==    definitely lost: 36 bytes in 6 blocks
+==31574==    indirectly lost: 0 bytes in 0 blocks
+==31574==      possibly lost: 272 bytes in 1 blocks
+==31574==    still reachable: 372 bytes in 10 blocks
+==31574==         suppressed: 0 bytes in 0 blocks
+==31574== Reachable blocks (those to which a pointer was found) are not shown.
+==31574== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==31574== 
+==31574== ERROR SUMMARY: 36 errors from 18 contexts (suppressed: 2 from 2)
+==31574== 
+==31574== 1 errors in context 1 of 18:
+==31574== Thread 2:
+==31574== Invalid read of size 8
+==31574==    at 0x4C11AA4: SF_ProcessSendMessage (MessageLib.c:70)
+==31574==    by 0x4C11C9D: SF_MessageThread (MessageLib.c:127)
+==31574==    by 0x3870A07EE4: start_thread (in /usr/lib64/libpthread-2.18.so)
+==31574==    by 0x3870EF4D1C: clone (in /usr/lib64/libc-2.18.so)
+==31574==  Address 0x4e36ab0 is 0 bytes inside a block of size 4 alloc'd
+==31574==    at 0x4A081D4: calloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31574==    by 0x4C113CD: SF_SetListData (LinkedList.c:98)
+==31574==    by 0x4C115C1: SF_InsertListFirst (LinkedList.c:168)
+==31574==    by 0x4C11E7A: SF_SendMessage (MessageLib.c:227)
+==31574==    by 0x4008E9: main (MessageLibTest.c:34)
+==31574== 
+==31574== 
+==31574== 1 errors in context 2 of 18:
+==31574== Invalid read of size 8
+==31574==    at 0x4C11A8E: SF_ProcessSendMessage (MessageLib.c:64)
+==31574==    by 0x4C11C9D: SF_MessageThread (MessageLib.c:127)
+==31574==    by 0x3870A07EE4: start_thread (in /usr/lib64/libpthread-2.18.so)
+==31574==    by 0x3870EF4D1C: clone (in /usr/lib64/libc-2.18.so)
+==31574==  Address 0x4e36ab8 is 4 bytes after a block of size 4 alloc'd
+==31574==    at 0x4A081D4: calloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31574==    by 0x4C113CD: SF_SetListData (LinkedList.c:98)
+==31574==    by 0x4C115C1: SF_InsertListFirst (LinkedList.c:168)
+==31574==    by 0x4C11E7A: SF_SendMessage (MessageLib.c:227)
+==31574==    by 0x4008E9: main (MessageLibTest.c:34)
+==31574== 
+==31574== 
+==31574== 1 errors in context 3 of 18:
+==31574== Invalid read of size 1
+==31574==    at 0x4A09FB8: strcmp (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31574==    by 0x4C11C71: SF_MessageThread (MessageLib.c:123)
+==31574==    by 0x3870A07EE4: start_thread (in /usr/lib64/libpthread-2.18.so)
+==31574==    by 0x3870EF4D1C: clone (in /usr/lib64/libc-2.18.so)
+==31574==  Address 0x4e36a64 is 0 bytes after a block of size 4 alloc'd
+==31574==    at 0x4A081D4: calloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31574==    by 0x4C11371: SF_SetListName (LinkedList.c:86)
+==31574==    by 0x4C115A8: SF_InsertListFirst (LinkedList.c:166)
+==31574==    by 0x4C11E7A: SF_SendMessage (MessageLib.c:227)
+==31574==    by 0x4008E9: main (MessageLibTest.c:34)
+==31574== 
+==31574== 
+==31574== 1 errors in context 4 of 18:
+==31574== Thread 1:
+==31574== Invalid write of size 1
+==31574==    at 0x4A09363: strcpy (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31574==    by 0x4C11393: SF_SetListName (LinkedList.c:88)
+==31574==    by 0x4C115A8: SF_InsertListFirst (LinkedList.c:166)
+==31574==    by 0x4C11E7A: SF_SendMessage (MessageLib.c:227)
+==31574==    by 0x4008E9: main (MessageLibTest.c:34)
+==31574==  Address 0x4e36a64 is 0 bytes after a block of size 4 alloc'd
+==31574==    at 0x4A081D4: calloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31574==    by 0x4C11371: SF_SetListName (LinkedList.c:86)
+==31574==    by 0x4C115A8: SF_InsertListFirst (LinkedList.c:166)
+==31574==    by 0x4C11E7A: SF_SendMessage (MessageLib.c:227)
+==31574==    by 0x4008E9: main (MessageLibTest.c:34)
+==31574== 
+==31574== 
+==31574== 2 errors in context 5 of 18:
+==31574== Invalid write of size 8
+==31574==    at 0x4A0A473: memcpy@@GLIBC_2.14 (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31574==    by 0x4C113F0: SF_SetListData (LinkedList.c:100)
+==31574==    by 0x4C115C1: SF_InsertListFirst (LinkedList.c:168)
+==31574==    by 0x4C11E7A: SF_SendMessage (MessageLib.c:227)
+==31574==    by 0x4008E9: main (MessageLibTest.c:34)
+==31574==  Address 0x4e36ab0 is 0 bytes inside a block of size 4 alloc'd
+==31574==    at 0x4A081D4: calloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31574==    by 0x4C113CD: SF_SetListData (LinkedList.c:98)
+==31574==    by 0x4C115C1: SF_InsertListFirst (LinkedList.c:168)
+==31574==    by 0x4C11E7A: SF_SendMessage (MessageLib.c:227)
+==31574==    by 0x4008E9: main (MessageLibTest.c:34)
+==31574== 
+==31574== 
+==31574== 3 errors in context 6 of 18:
+==31574== Thread 2:
+==31574== Invalid read of size 4
+==31574==    at 0x400826: fnMessageHandler (MessageLibTest.c:12)
+==31574==    by 0x4C11A2C: SF_ProcessPostMessage (MessageLib.c:41)
+==31574==    by 0x4C11C4D: SF_MessageThread (MessageLib.c:118)
+==31574==    by 0x3870A07EE4: start_thread (in /usr/lib64/libpthread-2.18.so)
+==31574==    by 0x3870EF4D1C: clone (in /usr/lib64/libc-2.18.so)
+==31574==  Address 0x4e365f8 is 4 bytes after a block of size 4 alloc'd
+==31574==    at 0x4A081D4: calloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31574==    by 0x4C113CD: SF_SetListData (LinkedList.c:98)
+==31574==    by 0x4C1150C: SF_InsertList (LinkedList.c:145)
+==31574==    by 0x4C12002: SF_PostMessage (MessageLib.c:281)
+==31574==    by 0x40088F: main (MessageLibTest.c:28)
+==31574== 
+==31574== 
+==31574== 3 errors in context 7 of 18:
+==31574== Invalid read of size 1
+==31574==    at 0x4A09FB8: strcmp (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31574==    by 0x4C11C21: SF_MessageThread (MessageLib.c:114)
+==31574==    by 0x3870A07EE4: start_thread (in /usr/lib64/libpthread-2.18.so)
+==31574==    by 0x3870EF4D1C: clone (in /usr/lib64/libc-2.18.so)
+==31574==  Address 0x4e365a4 is 0 bytes after a block of size 4 alloc'd
+==31574==    at 0x4A081D4: calloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31574==    by 0x4C11371: SF_SetListName (LinkedList.c:86)
+==31574==    by 0x4C114F3: SF_InsertList (LinkedList.c:143)
+==31574==    by 0x4C12002: SF_PostMessage (MessageLib.c:281)
+==31574==    by 0x40088F: main (MessageLibTest.c:28)
+==31574== 
+==31574== 
+==31574== 3 errors in context 8 of 18:
+==31574== Thread 1:
+==31574== Invalid write of size 1
+==31574==    at 0x4A09363: strcpy (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31574==    by 0x4C11393: SF_SetListName (LinkedList.c:88)
+==31574==    by 0x4C114F3: SF_InsertList (LinkedList.c:143)
+==31574==    by 0x4C12002: SF_PostMessage (MessageLib.c:281)
+==31574==    by 0x40088F: main (MessageLibTest.c:28)
+==31574==  Address 0x4e365a4 is 0 bytes after a block of size 4 alloc'd
+==31574==    at 0x4A081D4: calloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31574==    by 0x4C11371: SF_SetListName (LinkedList.c:86)
+==31574==    by 0x4C114F3: SF_InsertList (LinkedList.c:143)
+==31574==    by 0x4C12002: SF_PostMessage (MessageLib.c:281)
+==31574==    by 0x40088F: main (MessageLibTest.c:28)
+==31574== 
+==31574== 
+==31574== 4 errors in context 9 of 18:
+==31574== Thread 2:
+==31574== Invalid read of size 1
+==31574==    at 0x4A09304: strlen (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31574==    by 0x4C11BF2: SF_MessageThread (MessageLib.c:112)
+==31574==    by 0x3870A07EE4: start_thread (in /usr/lib64/libpthread-2.18.so)
+==31574==    by 0x3870EF4D1C: clone (in /usr/lib64/libc-2.18.so)
+==31574==  Address 0x4e36a64 is 0 bytes after a block of size 4 alloc'd
+==31574==    at 0x4A081D4: calloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31574==    by 0x4C11371: SF_SetListName (LinkedList.c:86)
+==31574==    by 0x4C115A8: SF_InsertListFirst (LinkedList.c:166)
+==31574==    by 0x4C11E7A: SF_SendMessage (MessageLib.c:227)
+==31574==    by 0x4008E9: main (MessageLibTest.c:34)
+==31574== 
+==31574== 
+==31574== 4 errors in context 10 of 18:
+==31574== Invalid read of size 1
+==31574==    at 0x3870E48C7B: vfprintf (in /usr/lib64/libc-2.18.so)
+==31574==    by 0x3870E51AE8: printf (in /usr/lib64/libc-2.18.so)
+==31574==    by 0x4C11BE6: SF_MessageThread (MessageLib.c:110)
+==31574==    by 0x3870A07EE4: start_thread (in /usr/lib64/libpthread-2.18.so)
+==31574==    by 0x3870EF4D1C: clone (in /usr/lib64/libc-2.18.so)
+==31574==  Address 0x4e36a64 is 0 bytes after a block of size 4 alloc'd
+==31574==    at 0x4A081D4: calloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31574==    by 0x4C11371: SF_SetListName (LinkedList.c:86)
+==31574==    by 0x4C115A8: SF_InsertListFirst (LinkedList.c:166)
+==31574==    by 0x4C11E7A: SF_SendMessage (MessageLib.c:227)
+==31574==    by 0x4008E9: main (MessageLibTest.c:34)
+==31574== 
+==31574== 
+==31574== 6 errors in context 11 of 18:
+==31574== Thread 1:
+==31574== Invalid write of size 8
+==31574==    at 0x4A0A555: memcpy@@GLIBC_2.14 (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31574==    by 0x4C113F0: SF_SetListData (LinkedList.c:100)
+==31574==    by 0x4C1150C: SF_InsertList (LinkedList.c:145)
+==31574==    by 0x4C12002: SF_PostMessage (MessageLib.c:281)
+==31574==    by 0x40088F: main (MessageLibTest.c:28)
+==31574==  Address 0x4e365f8 is 4 bytes after a block of size 4 alloc'd
+==31574==    at 0x4A081D4: calloc (in /usr/lib64/valgrind/vgpreload_memcheck-amd64-linux.so)
+==31574==    by 0x4C113CD: SF_SetListData (LinkedList.c:98)
+==31574==    by 0x4C1150C: SF_InsertList (LinkedList.c:145)
+==31574==    by 0x4C12002: SF_PostMessage (MessageLib.c:281)
+==31574==    by 0x40088F: main (MessageLibTest.c:28)
+==31574== 
+--31574-- 
+--31574-- used_suppression:      2 glibc-2.5.x-on-SUSE-10.2-(PPC)-2a /usr/lib64/valgrind/default.supp:1286
+==31574== 
+==31574== ERROR SUMMARY: 36 errors from 18 contexts (suppressed: 2 from 2)

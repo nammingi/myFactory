@@ -2,21 +2,28 @@
 
 #include "Common.h"
 
-inline void CheckDebugPoint(char* _func_)
+#define _DEBUG_
+
+
+#ifdef _DEBUG_
+
+inline void CheckDebugPoint(const char* _func_)
 {
-    printf("[Debug point] Function [%-20s] has called.\n",_func_);
+    printf("[Debug] Function [%-20s] has called.\n",_func_);
 }
 
-
-void PrintError(Error_E eError, char *pstrFunc)
+#else
+inline void CheckDebugPoint(const char* _func_)
 {
-    if(eError != NULL)
+}
+#endif
+
+void PrintError(const Error_E eError, const char *pstrFunc)
+{
+    if(eError)
     {
         switch(eError)
         {
-            case ERROR_NONE:
-                printf("ERROR_NONE, at func[%s]\n", pstrFunc);
-                break;
             case ERROR_BAD_PARAMETER:
                 printf("ERROR_BAD_PARAMETER, at func[%s]\n", pstrFunc);
                 break;
@@ -37,6 +44,6 @@ void PrintError(Error_E eError, char *pstrFunc)
     }
     else
     {
-        printf(">> Print error occured : [%d]ERROR_BAD_PARAMETER, at func[%s]\n", eError, pstrFunc);
+        printf("ERROR_NONE, at func[%s]\n", pstrFunc);
     }
 }

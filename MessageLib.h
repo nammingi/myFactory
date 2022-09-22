@@ -8,7 +8,7 @@ typedef struct
 } Message_T;
 typedef struct MessageSt_T MessageSt_T;
 
-typedef int32_t (*pfnMessageHandler)(Message_T *ptMessage);
+typedef int32_t (*pfnMessageHandler)(const Message_T *ptMessage);
 
 typedef struct Message_IF_T{
     MessageSt_T *ptMessageSt;

@@ -18,6 +18,6 @@ typedef enum{
     TRUE
 } BOOL_E;
 
-void CheckDebugPoint(char* _func_);
-void PrintError(Error_E eError, char *pstrFunc);
+void CheckDebugPoint(const char* _func_);
+void PrintError(const Error_E eError, const char *pstrFunc);
 #endif

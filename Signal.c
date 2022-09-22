@@ -1,9 +1,11 @@
 #include <pthread.h>
+#include <stdlib.h>
 
 #include "Common.h"
 #include "Signal.h"
 
-struct Signal_T {
+struct Signal_T
+{
     BOOL_E bSignaled;
 
     pthread_cond_t tCond;
@@ -11,14 +13,17 @@ struct Signal_T {
 };
 
 
-static Error_E SF_InitCond(Signal_T *ptSignal){
+static Error_E SF_InitCond(Signal_T *ptSignal)
+{
+    CheckDebugPoint(__func__);
     Error_E eError = ERROR_NONE;
     int iRetVal;
     pthread_condattr_t tCondAttr;
 
     iRetVal = pthread_condattr_init(&tCondAttr);
 
-    if(iRetVal != 0){
+    if(iRetVal != 0)
+    {
         pthread_cond_init(&ptSignal->tCond,&tCondAttr);
     }
     pthread_condattr_destroy(&tCondAttr);
@@ -26,7 +31,9 @@ static Error_E SF_InitCond(Signal_T *ptSignal){
 
 }
 
-static Error_E SF_InitMutex(Signal_T *ptSignal){
+static Error_E SF_InitMutex(Signal_T *ptSignal)
+{
+    CheckDebugPoint(__func__);
     Error_E eError = ERROR_NONE;
     pthread_mutexattr_t tMutexAttr;
     pthread_mutexattr_init(&tMutexAttr);
@@ -34,21 +41,26 @@ static Error_E SF_InitMutex(Signal_T *ptSignal){
     return eError;
 }
 
-static Error_E SF_SignalWait(Signal_T *ptSignal){
+static Error_E SF_SignalWait(Signal_T *ptSignal)
+{
+    CheckDebugPoint(__func__);
     Error_E eError = ERROR_NONE;
 
     ptSignal->bSignaled = FALSE;
 
-    if(ptSignal != NULL){
+    if(ptSignal != NULL)
+    {
         int iRetVal = NULL; 
         
-        while((ptSignal->bSignaled==FALSE) && (iRetVal == 0)){
+        while((ptSignal->bSignaled==FALSE) && (iRetVal == 0))
+        {
             iRetVal = pthread_cond_wait(&ptSignal->tCond, &ptSignal->tMutex);
         }
 
         ptSignal->bSignaled=FALSE;  
 
-        if(iRetVal != 0){
+        if(iRetVal != 0)
+        {
             eError = ERROR_THREAD_ERROR;
         }
     }else{
@@ -59,29 +71,38 @@ static Error_E SF_SignalWait(Signal_T *ptSignal){
 
 
 
-Error_E SignalLock(Signal_T *ptSignal){
+Error_E SignalLock(Signal_T *ptSignal)
+{
+    CheckDebugPoint(__func__);
     Error_E eError = ERROR_NONE;
     int iRetVal = NULL;
     iRetVal = pthread_mutex_lock(&ptSignal->tMutex);
-    if(iRetVal != 0){
+    if(iRetVal != 0)
+    {
         eError = ERROR_THREAD_ERROR;
     }
     return eError;
 }
 
-Error_E SignalUnLock(Signal_T *ptSignal){
+Error_E SignalUnLock(Signal_T *ptSignal)
+{
+    CheckDebugPoint(__func__);
     Error_E eError = ERROR_NONE;
     int iRetVal = NULL;
     iRetVal = pthread_mutex_unlock(&ptSignal->tMutex);
-    if(iRetVal != 0){
+    if(iRetVal != 0)
+    {
         eError = ERROR_THREAD_ERROR;
     }
     return eError;
 }
 
-Error_E SignalWait(Signal_T *ptSignal){
+Error_E SignalWait(Signal_T *ptSignal)
+{
+    CheckDebugPoint(__func__);
     Error_E eError = ERROR_NONE;
-    if(ptSignal != NULL){
+    if(ptSignal != NULL)
+    {
         (void)pthread_mutex_lock(&ptSignal->tMutex);
         eError = SF_SignalWait(ptSignal);
         (void)pthread_mutex_unlock(&ptSignal->tMutex);
@@ -92,17 +113,21 @@ Error_E SignalWait(Signal_T *ptSignal){
     return eError;
 }
 
-Error_E SignalWakeup(Signal_T *ptSignal){
+Error_E SignalWakeup(Signal_T *ptSignal)
+{
+    CheckDebugPoint(__func__);
     Error_E eError = ERROR_NONE;
 
     int iRetVal = NULL;
 
-    if(ptSignal != NULL){
+    if(ptSignal != NULL)
+    {
         (void)pthread_mutex_lock(&ptSignal->tMutex);
 
         iRetVal = pthread_cond_signal(&ptSignal->tCond);
 
-        if(iRetVal != 0){
+        if(iRetVal != 0)
+        {
             eError = ERROR_SIGNAL;
         }
         ptSignal->bSignaled = TRUE;
@@ -115,10 +140,13 @@ Error_E SignalWakeup(Signal_T *ptSignal){
     return eError;
 }
 
-Error_E SignalBareWait(Signal_T *ptSignal){
+Error_E SignalBareWait(Signal_T *ptSignal)
+{
+    CheckDebugPoint(__func__);
     Error_E eError = ERROR_NONE;
     
-    if(ptSignal != NULL){
+    if(ptSignal != NULL)
+    {
         eError = SF_SignalWait(ptSignal);
     }else{
         eError = ERROR_BAD_PARAMETER;
@@ -127,14 +155,18 @@ Error_E SignalBareWait(Signal_T *ptSignal){
     return eError;
 }
 
-Error_E SignalBareWakeup(Signal_T *ptSignal){
+Error_E SignalBareWakeup(Signal_T *ptSignal)
+{
+    CheckDebugPoint(__func__);
     Error_E eError = ERROR_NONE;
     int iRetVal = NULL;
 
-    if(ptSignal != NULL){
+    if(ptSignal != NULL)
+    {
         iRetVal = pthread_cond_signal(&ptSignal->tCond);
 
-        if(iRetVal != 0){
+        if(iRetVal != 0)
+        {
             eError = ERROR_SIGNAL;
         }
         ptSignal->bSignaled = TRUE;
@@ -145,7 +177,9 @@ Error_E SignalBareWakeup(Signal_T *ptSignal){
     return eError;
 }
 
-Signal_T *CreateSignal(void){
+Signal_T *CreateSignal(void)
+{
+    CheckDebugPoint(__func__);
     Signal_T *ptSignal;
 
     Error_E eError;
@@ -159,10 +193,13 @@ Signal_T *CreateSignal(void){
 
 }
 
-Error_E DestroySignal(Signal_T *ptSignal){
+Error_E DestroySignal(Signal_T *ptSignal)
+{
+    CheckDebugPoint(__func__);
     Error_E eError = ERROR_NONE;
     
-    if(ptSignal != NULL){
+    if(ptSignal != NULL)
+    {
 
         (void)pthread_cond_destroy(&ptSignal->tCond);
         (void)pthread_mutex_destroy(&ptSignal->tMutex);

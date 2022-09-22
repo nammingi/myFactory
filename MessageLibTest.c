@@ -1,15 +1,14 @@
 #include <stdio.h>
-#include <stdbool.h>
-#include <stdlib.h>
 #include <string.h>
 #include <stdint.h>
-
+#include <unistd.h> 
 #include "Common.h"
 #include "MessageLib.h"
 
-int32_t fnMessageHandler(Message_T *ptMessage)
+
+int32_t fnMessageHandler(const Message_T *ptMessage)
 {
-    printf("[Debug point] This is msg handler\n%u\n", ptMessage->uiMessage);
+    printf("[Debug] This is msg handler\n%u\n", ptMessage->uiMessage);
 
     return 0;
 }
@@ -23,23 +22,27 @@ int main()
     printf("[Main Started]\n");
     
     Message_IF_T *ptMessageIF;
+
     ptMessageIF = CreateMessage(pfnMessageHandler);
 
     ptMessageIF->PostMessage(ptMessageIF->ptMessageSt, 1111, NULL);
 
     ptMessageIF->PostMessage(ptMessageIF->ptMessageSt, 2222, NULL);
 
+    ptMessageIF->SendMessage(ptMessageIF->ptMessageSt, 4444, NULL);
+
     ptMessageIF->PostMessage(ptMessageIF->ptMessageSt, 3333, NULL);
 
-    ptMessageIF->SendMessage(ptMessageIF->ptMessageSt, 4444, NULL);
+    ptMessageIF->PostMessage(ptMessageIF->ptMessageSt, 5555, NULL);
+
     
     printf("[All MSG Inserted]\n");
 
     sleep(1);
 
-    eError = DestroyMessage(ptMessageIF);
+    (void)DestroyMessage(ptMessageIF);
     
-    printf("DES???\n");
+    printf("[EXIT]\n");
 
     return eError;
 

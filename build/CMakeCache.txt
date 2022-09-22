@@ -14,6 +14,12 @@
 # EXTERNAL cache entries
 ########################
 
+//No help, variable specified on the command line.
+ADD_COMPILE_DEFINITION:UNINITIALIZED=_DEBUG_
+
+//No help, variable specified on the command line.
+ADD_COMPILE_DEFINITIONS:UNINITIALIZED=_DEBUG_
+
 //Path to a program.
 CMAKE_ADDR2LINE:FILEPATH=/usr/bin/addr2line
 
@@ -224,6 +230,12 @@ MyFactoryTest_BINARY_DIR:STATIC=/home/B220660/study/architecture/myFactory/build
 
 //Value Computed by CMake
 MyFactoryTest_SOURCE_DIR:STATIC=/home/B220660/study/architecture/myFactory
+
+//No help, variable specified on the command line.
+SOME_DEFINITION:UNINITIALIZED=_DEBUG_
+
+//No help, variable specified on the command line.
+_DEBUG_:UNINITIALIZED=TRUE
 
 
 ########################

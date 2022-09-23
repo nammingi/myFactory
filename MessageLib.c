@@ -96,30 +96,30 @@ static void *SF_MessageThread(void *pvParam)// MessageSt_T *ptMessageSt)
         uint32_t whileCnt=0;
         while(ptMessageSt->bDestroyed == FALSE)
         {   
-            printf("[Debug] MSG Thread, While Syntax, %d times repeated.\n",++whileCnt);
+            printf("[Debug][MessageThread] MSG Thread, While Syntax, %d times repeated.\n",++whileCnt);
             (void)SignalLock(ptMessageSt->ptSignal);
-            printf("[Debug] Msg Thread, While Syntax, Signal LOCKED\n");
+            printf("[Debug][MessageThread] Msg Thread, While Syntax, Signal LOCKED\n");
             if(ptLinkedList_IF->GetListCount(ptListSt) == 0)
             {
-                printf("[Debug] Msg Thread, While Syntax, BareWaiting..\n");
+                printf("[Debug][MessageThread] Msg Thread, While Syntax, BareWaiting..\n");
                 (void)SignalBareWait(ptMessageSt->ptSignal);
             }
 
             ptList = ptLinkedList_IF->GetFirstList(ptListSt);
-            printf("[Debug] Msg Thread, While Syntax, First List of %d List loaded.\n",ptLinkedList_IF->GetListCount(ptListSt));
+            printf("[Debug][MessageThread] Msg Thread, While Syntax, First List of %d List loaded.\n",ptLinkedList_IF->GetListCount(ptListSt));
             if(ptList != NULL)
             {
                 const char* pstrListName = ptLinkedList_IF->GetListName(ptList);
 
-                printf("[Debug] Msg Thread, While Syntax, Now ListName is [%s]\n",pstrListName);
+                printf("[Debug][MessageThread] Msg Thread, While Syntax, Now ListName is [%s]\n",pstrListName);
 
                 if((strlen(pstrListName) < sizeof("Post"))||(strlen(pstrListName) < sizeof("Send")))
                 {
                     if(strcmp(pstrListName, "Post") == 0)
                     {
-                        Message_T *tMessage = ptLinkedList_IF->GetListData(ptList);
+                        Message_T *ptMessage = ptLinkedList_IF->GetListData(ptList);
                         
-                        SF_ProcessPostMessage(ptMessageSt, tMessage);
+                        SF_ProcessPostMessage(ptMessageSt, ptMessage);
 
                         (void)ptLinkedList_IF->DeleteList(ptList);
                     }
@@ -133,11 +133,11 @@ static void *SF_MessageThread(void *pvParam)// MessageSt_T *ptMessageSt)
                     }
                 }
                 
-                printf("[Debug] Msg Thread, While Syntax, previous Signal UnLOCKING\n");
+                printf("[Debug][MessageThread] Msg Thread, While Syntax, previous Signal UnLOCKING\n");
 
                 (void)SignalUnLock(ptMessageSt->ptSignal);
 
-                printf("[Debug] MSG Thread, While Syntax, Signal UnLOCKED\n");
+                printf("[Debug][MessageThread] MSG Thread, While Syntax, Signal UnLOCKED\n");
             
             }
         }
@@ -233,6 +233,8 @@ static Error_E SF_SendMessage(MessageSt_T *ptMessageSt, uint32_t uiMessage, void
 
             (void)SignalBareWait(tSendMessage.ptSignal);
 
+            printf("[Debug] Messaged sending processed.\n");
+
             (void)SignalUnLock(tSendMessage.ptSignal);
 
             (void)DestroySignal(tSendMessage.ptSignal);
@@ -300,10 +302,10 @@ static Error_E SF_PostMessage(MessageSt_T *ptMessageSt, uint32_t uiMessage, void
     return eError;
 }
 
-static Error_E SF_PostMessageEX(MessageSt_T *ptMessageSt, uint32_t uiMessage, void *pvParam, uint32_t uiOption) //기능 두개 추가해야함. 하나는 중복삭제, 하나는 긴급  
+static Error_E SF_PostMessageEX(MessageSt_T *ptMessageSt, uint32_t uiMessage, void *pvParam, uint32_t uiOption)
 {
+    CheckDebugPoint(__func__);
     Error_E eError = ERROR_NONE;
-
     if(ptMessageSt != NULL)
     {
         LinkedList_IF_T *ptListIF = ptMessageSt->ptLinkedListIF;
@@ -319,14 +321,16 @@ static Error_E SF_PostMessageEX(MessageSt_T *ptMessageSt, uint32_t uiMessage, vo
 
         (void)SignalLock(ptMessageSt->ptSignal);
 
-        if((uiOption & REMOVE_DUPLICATED) == REMOVE_DUPLICATED)
+        if((uiOption & POST_OPT_REMOVE_DUPLICATED) == POST_OPT_REMOVE_DUPLICATED)
         {
             LinkedList_T *ptList = ptListIF->GetFirstList(ptListSt);
 
-            while(ptListIF->isListTail(ptListSt,ptList) == FALSE)
+            printf("[List Count is %d ]\n", ptListIF->GetListCount(ptListSt));
+
+            while(ptList != NULL)
             {
                 Message_T *ptMessage = ptListIF->GetListData(ptList);
-
+        
                 if(ptMessage->uiMessage == uiMessage)
                 {
                     LinkedList_T *ptTempList = ptListIF->GetPrevList(ptListSt, ptList);
@@ -334,14 +338,12 @@ static Error_E SF_PostMessageEX(MessageSt_T *ptMessageSt, uint32_t uiMessage, vo
                     (void)ptListIF->DeleteList(ptList);
 
                     ptList = ptTempList;
-
                 }
-
                 ptList = ptListIF->GetNextList(ptListSt, ptList);
             }
         }
 
-        if((uiOption & PUSH_FIRST) == PUSH_FIRST)
+        if((uiOption & POST_OPT_PUSH_FIRST) == POST_OPT_PUSH_FIRST)
         {
             ptInsertedList = ptListIF->InsertListFirst(ptListSt, "Post", &tMessage, sizeof(tMessage));
         } 
@@ -380,14 +382,12 @@ Message_IF_T* CreateMessage(pfnMessageHandler fnMessageHandler)
     
     if(ptRetIF != NULL)
     {
-
         Error_E eError;
 
         ptRetIF->ptMessageSt = (MessageSt_T*)calloc(1UL, sizeof(MessageSt_T));
 
         if(ptRetIF->ptMessageSt != NULL)
         {
-
             MessageSt_T *ptMessageSt = ptRetIF->ptMessageSt;
 
             ptMessageSt->bDestroyed = FALSE;
@@ -396,14 +396,13 @@ Message_IF_T* CreateMessage(pfnMessageHandler fnMessageHandler)
 
             if((ptMessageSt->ptSignal != NULL) && (ptMessageSt->ptLinkedListIF != NULL))
             {
-
                 ptMessageSt->fnMessageHandler = fnMessageHandler;
                 
-                ptRetIF->SendMessage = SF_SendMessage;
-                ptRetIF->PostMessage = SF_PostMessage;
+                ptRetIF->SendMessage    = SF_SendMessage;
+                ptRetIF->PostMessage    = SF_PostMessage;
+                ptRetIF->PostMessageEX  = SF_PostMessageEX;
 
                 eError = SF_CreateMessageThread(ptRetIF->ptMessageSt);
-            
             }
             else
             {

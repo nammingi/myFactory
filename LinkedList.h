@@ -1,9 +1,6 @@
 #ifndef LINKEDLIST_H_
 #define LINKEDLIST_H_
 
-#define REMOVE_DUPLICATED 0x00000001U
-#define PUSH_FIRST 0x000002U
-
 typedef struct LinkedList_T LinkedList_T;
 typedef struct LinkedListSt_T LinkedListSt_T;
 
@@ -17,18 +14,19 @@ typedef struct {
     Error_E (*DeleteList)(LinkedList_T *ptList);
     Error_E (*TermList)(LinkedListSt_T *ptListSt);
     char*   (*GetListName)(LinkedList_T *ptList);
-    Error_E (*SetListName)(LinkedList_T *ptList, const char* pctstrListName);
+    Error_E (*SetListName)(LinkedList_T *ptList, const char* pcstrListName);
     void *(*GetListData)(LinkedList_T *ptList);
     uint32_t(*GetListDataSize)(LinkedList_T *ptList);
     int (*GetListCount)(LinkedListSt_T *ptListSt);
     Error_E (*PrintListAll)(LinkedListSt_T *ptListSt);
     BOOL_E (*isListTail)(const LinkedListSt_T *ptListSt, const LinkedList_T *ptList);
     BOOL_E (*isListHead)(const LinkedListSt_T *ptListSt, const LinkedList_T *ptList);
-    LinkedList_T *(*GetNextList)(const LinkedListSt *ptListSt, const LinkedList_T *ptList);
-    LinkedList_T *(*GetPrevList)(const LinkedListSt *ptListSt, const LinkedList_T *ptList);
+    LinkedList_T *(*GetNextList)(const LinkedListSt_T *ptListSt, const LinkedList_T *ptList);
+    LinkedList_T *(*GetPrevList)(const LinkedListSt_T *ptListSt, const LinkedList_T *ptList);
 
 } LinkedList_IF_T;
 
 LinkedList_IF_T *CreateList(void);
+
 Error_E DestroyList(LinkedList_IF_T *ptListIF);
 #endif

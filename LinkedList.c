@@ -55,6 +55,7 @@ static Error_E SF_Init_LinkedList(LinkedListSt_T *ptListSt)
 static BOOL_E SF_IsListTail(const LinkedListSt_T *ptListSt, const LinkedList_T *ptList)
 {
     CheckDebugPoint(__func__);
+
     BOOL_E bRetVal = FALSE;
 
     if((ptListSt != NULL) && (ptList != NULL))
@@ -82,7 +83,6 @@ static LinkedList_T *SF_GetFirstList(const LinkedListSt_T *ptListSt)
 {
     CheckDebugPoint(__func__);
     LinkedList_T *ptFisrtItem = NULL;
-
     if(ptListSt != NULL)
     {
         if(SF_IsListTail(ptListSt, ptListSt->ptHead->ptNext) == FALSE)
@@ -90,7 +90,6 @@ static LinkedList_T *SF_GetFirstList(const LinkedListSt_T *ptListSt)
             ptFisrtItem = ptListSt->ptHead->ptNext;
         }
     }
-
     return ptFisrtItem;
 }
 
@@ -153,11 +152,18 @@ static Error_E SF_SetListData(LinkedList_T *ptList, void* pvData, uint32_t iData
 
 static void *SF_GetListData(LinkedList_T *ptList)
 {
+    Error_E eError = ERROR_NONE;
+
     CheckDebugPoint(__func__);
 
     if(ptList != NULL)
     {
         return ptList->pvData;
+    }
+    else
+    {
+        eError = ERROR_BAD_PARAMETER;
+        PrintError(eError, __func__);
     }
 }
 
@@ -295,7 +301,7 @@ static Error_E SF_DeleteListAll(LinkedListSt_T *ptListSt)
     return eError;
 }
 
-static LinkedList_T *SF_InsertList(LinkedListSt_T *ptListSt, const char* pstrListName, void* pvData, uint32_t iDataSize)
+static LinkedList_T *SF_InsertList(LinkedListSt_T *ptListSt, const char* pcstrListName, void* pvData, uint32_t iDataSize)
 {
     CheckDebugPoint(__func__);
     //attach to before Tail node.
@@ -316,9 +322,9 @@ static LinkedList_T *SF_InsertList(LinkedListSt_T *ptListSt, const char* pstrLis
             ptOldList->ptPrev         = ptNewList;
             ptNewList->ptNext         = ptOldList;
             
-            if(pstrListName != NULL)
+            if(pcstrListName != NULL)
             {
-                eError = SF_SetListName(ptNewList, pstrListName);
+                eError = SF_SetListName(ptNewList, pcstrListName);
             }
             else
             {
@@ -460,6 +466,8 @@ static Error_E SF_TermList(LinkedListSt_T *ptListSt)
 
 static LinkedList_T *SF_GetNextList(const LinkedListSt_T *ptListSt, const LinkedList_T *ptList)
 {   
+    CheckDebugPoint(__func__);
+
     LinkedList_T *ptRetList = NULL;
     if((ptListSt != NULL) && (ptList != NULL))
     {
@@ -473,6 +481,8 @@ static LinkedList_T *SF_GetNextList(const LinkedListSt_T *ptListSt, const Linked
 
 static LinkedList_T *SF_GetPrevList(const LinkedListSt_T *ptListSt, const LinkedList_T *ptList)
 {   
+    CheckDebugPoint(__func__);
+
     LinkedList_T *ptRetList = NULL;
     if((ptListSt != NULL) && (ptList != NULL))
     {

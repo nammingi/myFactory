@@ -1,6 +1,9 @@
 #ifndef MESSAGELIB_H_
 #define MESSAGELIB_H_
 
+#define POST_OPT_REMOVE_DUPLICATED   0x00000001U
+#define POST_OPT_PUSH_FIRST          0x00000002U
+
 typedef struct
 {
     void* pvParam;
@@ -15,6 +18,7 @@ typedef struct Message_IF_T{
     
     Error_E (*SendMessage)(MessageSt_T *ptMessageSt, uint32_t uiMessage, void* pvParam); //함수포인터
     Error_E (*PostMessage)(MessageSt_T *ptMessageSt, uint32_t uiMessage, void* pvParam); //함수포인터
+    Error_E (*PostMessageEX)(MessageSt_T *ptMessageSt, uint32_t uiMessage, void *pvParam, uint32_t uiOption);
 
 } Message_IF_T;
 

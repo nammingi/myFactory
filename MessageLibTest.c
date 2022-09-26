@@ -8,7 +8,7 @@
 
 int32_t fnMessageHandler(const Message_T *ptMessage)
 {
-    printf("[Debug] This is msg handler\n%u\n", ptMessage->uiMessage);
+    printf(">> This is msg handler\n%u\n", ptMessage->uiMessage);
 
     return 0;
 }
@@ -19,7 +19,7 @@ int main()
 
     pfnMessageHandler pfnMessageHandler = fnMessageHandler;
 
-    printf("[Main Started]\n");
+    dprintf("[Main Started]\n");
     
     Message_IF_T *ptMessageIF;
 
@@ -47,13 +47,13 @@ int main()
     
     ptMessageIF->PostMessageEX(ptMessageIF->ptMessageSt, 3333, NULL, POST_OPT_REMOVE_DUPLICATED);
     
-    printf("[All MSG Inserted]\n");
+    dprintf("[All MSG Inserted]\n");
 
     sleep(2);
 
     (void)DestroyMessage(ptMessageIF);
     
-    printf("[EXIT]\n");
+    dprintf("[EXIT]\n");
 
     return eError;
 

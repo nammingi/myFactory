@@ -4,7 +4,7 @@
 
 #include "Common.h"
 
-#define _DEBUG_
+#ifdef DEBUG
 
 #define BADKEY -1
 #define FUNC_SF_POSTMESSAGE 1
@@ -36,8 +36,6 @@ static int SF_GetValueFromKey(const char *key)
 }
 
 
-#ifdef _DEBUG_
-
 inline void CheckDebugPoint(const char* _func_)
 {
     if(_func_ != NULL)
@@ -64,11 +62,11 @@ inline void CheckDebugPoint(const char* _func_)
             default:
                 _color_s = COLOR_RESET;
         }
-        printf("%s[Debug] Function [%-20s] has called. / ThreadID = [%ul]%s\n",_color_s,_func_, ulThreadID,_color_rs);
+        dprintf("%s[Debug] Function [%-20s] has called. / ThreadID = [%ul]%s\n",_color_s,_func_, ulThreadID,_color_rs);
     }
     else
     {
-        printf("!!!! [Debug point Error] !!!!\n");
+        dprintf("!!!! [Debug point Error] !!!!\n");
     }
 }
 
@@ -85,25 +83,25 @@ void PrintError(const Error_E eError, const char *pstrFunc)
         switch(eError)
         {
             case ERROR_BAD_PARAMETER:
-                printf("ERROR_BAD_PARAMETER, at func[%s]\n", pstrFunc);
+                dprintf("ERROR_BAD_PARAMETER, at func[%s]\n", pstrFunc);
                 break;
             case ERROR_INSUFFICIENT_RESOURCE:
-                printf("ERROR_INSUFFICIENT_RESOURCE, at func[%s]\n", pstrFunc);
+                dprintf("ERROR_INSUFFICIENT_RESOURCE, at func[%s]\n", pstrFunc);
                 break;
             case ERROR_THREAD_ERROR:
-                printf("ERROR_THREAD_ERROR, at func[%s]\n", pstrFunc);
+                dprintf("ERROR_THREAD_ERROR, at func[%s]\n", pstrFunc);
                 break;
             case ERROR_SIGNAL:
-                printf("ERROR_SIGNAL, at func[%s]\n", pstrFunc);
+                dprintf("ERROR_SIGNAL, at func[%s]\n", pstrFunc);
                 break;
 
             default:
-                printf("[Unkown Error], at func[%s]\n", pstrFunc);
+                dprintf("[Unkown Error], at func[%s]\n", pstrFunc);
                 break;
         }
     }
     else
     {
-        printf("ERROR_NONE, at func[%s]\n", pstrFunc);
+        dprintf("ERROR_NONE, at func[%s]\n", pstrFunc);
     }
 }

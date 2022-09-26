@@ -181,7 +181,7 @@ static uint32_t SF_GetListDataSize(LinkedList_T *ptList)
     }
     else
     {
-        return NULL;
+        return 0;
     }
 }
 
@@ -427,7 +427,7 @@ static int SF_GetListCount(LinkedListSt_T *ptListSt)
                     ptList = ptList->ptNext;
                 }
 
-                printf("[Debug] in [%s], ListCount == %d\n", __func__, iRetVal);
+                dprintf("[Debug] ListCount == %d\n",iRetVal);
 
                 return iRetVal;
             }

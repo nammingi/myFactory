@@ -6,11 +6,23 @@ SET(TARGET_APP MyFactoryTest)
 SET(LIBRARY My_Message)
 SET(THREADS_PREFER_PTRHEAD_FLAG ON)
 
+
+
+#build option
+if(DEFINED DEBUG_)
+message("blabal:${DEBUG}")
+
+add_compile_definitions(${TARGET_APP} PRIVATE DEBUG=1)
+
 #Below for Debug
 SET(CMAKE_BUILD_TYPE "Debug")
 SET(CMAKE_CXX_FLAGS_DEBUG "$ENV{CXXFLAGS} -O0 -Wall -g2 -ggdb")
 SET(CMAKE_CXX_FLAGS_RELEASE "$ENV{CXXFLAGS} -O3 -Wall")
 #upper for debug
+
+
+endif()
+#build option
 
 SET(SRC_FILES
     ./LinkedList.c

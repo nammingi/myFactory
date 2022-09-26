@@ -85,7 +85,7 @@ static void *SF_MessageThread(void *pvParam)// MessageSt_T *ptMessageSt)
     {
         MessageSt_T *ptMessageSt = (MessageSt_T *)pvParam;
 
-        printf("[Debug] MSG Thread, CALLED\n");
+        dprintf("[Debug] MSG Thread, CALLED\n");
         const LinkedList_IF_T *ptLinkedList_IF;
         LinkedListSt_T *ptListSt;
         LinkedList_T *ptList;
@@ -96,22 +96,22 @@ static void *SF_MessageThread(void *pvParam)// MessageSt_T *ptMessageSt)
         uint32_t whileCnt=0;
         while(ptMessageSt->bDestroyed == FALSE)
         {   
-            printf("[Debug][MessageThread] MSG Thread, While Syntax, %d times repeated.\n",++whileCnt);
+            dprintf("[Debug][MessageThread] MSG Thread, While Syntax, %d times repeated.\n",++whileCnt);
             (void)SignalLock(ptMessageSt->ptSignal);
-            printf("[Debug][MessageThread] Msg Thread, While Syntax, Signal LOCKED\n");
+            dprintf("[Debug][MessageThread] Msg Thread, While Syntax, Signal LOCKED\n");
             if(ptLinkedList_IF->GetListCount(ptListSt) == 0)
             {
-                printf("[Debug][MessageThread] Msg Thread, While Syntax, BareWaiting..\n");
+                dprintf("[Debug][MessageThread] Msg Thread, While Syntax, BareWaiting..\n");
                 (void)SignalBareWait(ptMessageSt->ptSignal);
             }
 
             ptList = ptLinkedList_IF->GetFirstList(ptListSt);
-            printf("[Debug][MessageThread] Msg Thread, While Syntax, First List of %d List loaded.\n",ptLinkedList_IF->GetListCount(ptListSt));
+            dprintf("[Debug][MessageThread] Msg Thread, While Syntax, First List of %d List loaded.\n",ptLinkedList_IF->GetListCount(ptListSt));
             if(ptList != NULL)
             {
                 const char* pstrListName = ptLinkedList_IF->GetListName(ptList);
 
-                printf("[Debug][MessageThread] Msg Thread, While Syntax, Now ListName is [%s]\n",pstrListName);
+                dprintf("[Debug][MessageThread] Msg Thread, While Syntax, Now ListName is [%s]\n",pstrListName);
 
                 if((strlen(pstrListName) < sizeof("Post"))||(strlen(pstrListName) < sizeof("Send")))
                 {
@@ -133,11 +133,11 @@ static void *SF_MessageThread(void *pvParam)// MessageSt_T *ptMessageSt)
                     }
                 }
                 
-                printf("[Debug][MessageThread] Msg Thread, While Syntax, previous Signal UnLOCKING\n");
+                dprintf("[Debug][MessageThread] Msg Thread, While Syntax, previous Signal UnLOCKING\n");
 
                 (void)SignalUnLock(ptMessageSt->ptSignal);
 
-                printf("[Debug][MessageThread] MSG Thread, While Syntax, Signal UnLOCKED\n");
+                dprintf("[Debug][MessageThread] MSG Thread, While Syntax, Signal UnLOCKED\n");
             
             }
         }
@@ -233,7 +233,7 @@ static Error_E SF_SendMessage(MessageSt_T *ptMessageSt, uint32_t uiMessage, void
 
             (void)SignalBareWait(tSendMessage.ptSignal);
 
-            printf("[Debug] Messaged sending processed.\n");
+            dprintf("[Debug] Messaged sending processed.\n");
 
             (void)SignalUnLock(tSendMessage.ptSignal);
 
@@ -275,7 +275,7 @@ static Error_E SF_PostMessage(MessageSt_T *ptMessageSt, uint32_t uiMessage, void
             ptMessage->uiMessage = uiMessage;
         }
         (void)SignalLock(ptMessageSt->ptSignal);
-        printf("[Debug] PostMSG, Signal LOCKED\n");
+        dprintf("[Debug] PostMSG, Signal LOCKED\n");
 
         ptInsertedList = ptLinkedListIF->InsertList(ptLinkedListIF->ptListSt, "Post", ptMessage, sizeof(Message_T));
 
@@ -289,7 +289,7 @@ static Error_E SF_PostMessage(MessageSt_T *ptMessageSt, uint32_t uiMessage, void
         }
 
         (void)SignalUnLock(ptMessageSt->ptSignal);
-        printf("[Debug] PostMSG, Signal UnLOCKED\n");
+        dprintf("[Debug] PostMSG, Signal UnLOCKED\n");
 
         free(ptMessage);
     }
@@ -325,7 +325,7 @@ static Error_E SF_PostMessageEX(MessageSt_T *ptMessageSt, uint32_t uiMessage, vo
         {
             LinkedList_T *ptList = ptListIF->GetFirstList(ptListSt);
 
-            printf("[List Count is %d ]\n", ptListIF->GetListCount(ptListSt));
+            dprintf("[List Count is %d ]\n", ptListIF->GetListCount(ptListSt));
 
             while(ptList != NULL)
             {
